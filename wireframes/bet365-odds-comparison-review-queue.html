@@ -468,6 +468,21 @@
     margin-left: 6px;
   }
 
+  /* OVERRIDE BADGE */
+  .override-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(168,85,247,0.15);
+    color: var(--purple);
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+    margin-left: 6px;
+    border: 1px solid rgba(168,85,247,0.3);
+  }
+
   /* ESCALATED BADGE */
   .escalated-badge {
     display: inline-flex;
@@ -1377,7 +1392,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="row-blocked">
+              <tr class="row-blocked" id="blocked-BET-20039">
                 <td class="mono">BET-20039</td>
                 <td>GBR_7741</td>
                 <td>Atletico v Sevilla <span style="color:var(--text-secondary)">· Match Winner Away</span></td>
@@ -1388,10 +1403,10 @@
                 <td class="mono">£1,200.00</td>
                 <td class="muted mono">14:22:15</td>
                 <td>
-                  <button class="action-btn" style="color:var(--purple);border-color:rgba(168,85,247,0.4)" onclick="showToast('Override requires Senior Analyst role — switch role in top bar to demo', 'amber')">Override</button>
+                  <button class="action-btn" style="color:var(--purple);border-color:rgba(168,85,247,0.4)" onclick="showOverrideModal('BET-20039', 'Atletico v Sevilla — Match Winner Away', '+41.0%', '5.50', '3.90', '£1,200.00')">⚐ Override</button>
                 </td>
               </tr>
-              <tr class="row-blocked">
+              <tr class="row-blocked" id="blocked-BET-20040">
                 <td class="mono">BET-20040</td>
                 <td>GBR_3312</td>
                 <td>Roma v Lazio <span style="color:var(--text-secondary)">· BTTS No</span></td>
@@ -1402,7 +1417,7 @@
                 <td class="mono">£800.00</td>
                 <td class="muted mono">14:23:40</td>
                 <td>
-                  <button class="action-btn" style="color:var(--purple);border-color:rgba(168,85,247,0.4)" onclick="showToast('Override requires Senior Analyst role — switch role in top bar to demo', 'amber')">Override</button>
+                  <button class="action-btn" style="color:var(--purple);border-color:rgba(168,85,247,0.4)" onclick="showOverrideModal('BET-20040', 'Roma v Lazio — BTTS No', '+43.4%', '3.80', '2.65', '£800.00')">⚐ Override</button>
                 </td>
               </tr>
             </tbody>
@@ -1643,6 +1658,49 @@
   </div>
 </div>
 
+<!-- OVERRIDE MODAL -->
+<div class="modal-overlay" id="override-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">Override Auto-Block</div>
+        <div class="modal-subtitle" id="modal-subtitle-override">BET-00000 · Selection</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('override-modal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div style="background:var(--purple-bg);border:1px solid rgba(168,85,247,0.25);border-radius:6px;padding:10px 12px;margin-bottom:16px;font-size:12px;color:var(--purple);">
+        ⚐ This bet was auto-blocked — gap exceeded the configured threshold. Override will move it to the Review Queue with an override flag visible to all analysts.
+      </div>
+      <div class="modal-bet-detail">
+        <div class="detail-item"><label>Bet ID</label><span id="override-bet-id">—</span></div>
+        <div class="detail-item"><label>Gap %</label><span id="override-gap">—</span></div>
+        <div class="detail-item"><label>Platform Odds</label><span id="override-odds">—</span></div>
+        <div class="detail-item"><label>Stake</label><span id="override-stake">—</span></div>
+        <div class="detail-item" style="grid-column:1/-1"><label>Selection</label><span id="override-selection">—</span></div>
+      </div>
+      <div class="modal-field">
+        <label>Reason Code <span class="req">*</span></label>
+        <select class="modal-select" id="override-reason">
+          <option value="">— Select reason —</option>
+          <option>Pricing corrected — odds gap no longer valid</option>
+          <option>False positive — threshold miscalibration</option>
+          <option>Trader approval — accepted at current odds</option>
+          <option>Manual risk decision — reviewed and approved</option>
+        </select>
+      </div>
+      <div class="modal-field">
+        <label>Notes (optional)</label>
+        <textarea class="modal-textarea" placeholder="Add context for the audit log…"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('override-modal')">Cancel</button>
+      <button class="btn" style="background:var(--purple-bg);color:var(--purple);border-color:rgba(168,85,247,0.4);" onmouseover="this.style.background='var(--purple)';this.style.color='white';" onmouseout="this.style.background='var(--purple-bg)';this.style.color='var(--purple)';" onclick="confirmOverride()">⚐ Confirm Override</button>
+    </div>
+  </div>
+</div>
+
 <!-- TOAST -->
 <div class="toast" id="toast">
   <div class="toast-dot green" id="toast-dot"></div>
@@ -1797,6 +1855,82 @@
       'Showing 1–' + queueCount + ' of ' + queueCount + ' results';
     document.getElementById('results-count').textContent = queueCount + ' results';
   }
+
+  // ── OVERRIDE ──
+  let overrideBetData = {};
+
+  function showOverrideModal(id, selection, gap, odds, bet365odds, stake) {
+    overrideBetData = { id, selection, gap, odds, bet365odds, stake };
+    document.getElementById('override-bet-id').textContent = id;
+    document.getElementById('override-selection').textContent = selection;
+    document.getElementById('override-gap').textContent = gap;
+    document.getElementById('override-odds').textContent = odds;
+    document.getElementById('override-stake').textContent = stake;
+    document.getElementById('modal-subtitle-override').textContent = id + ' · ' + selection;
+    document.getElementById('override-reason').value = '';
+    document.getElementById('override-modal').classList.add('show');
+  }
+
+  function confirmOverride() {
+    const { id, selection, gap, odds, bet365odds, stake } = overrideBetData;
+    closeModal('override-modal');
+
+    // Remove from blocked log
+    const blockedRow = document.getElementById('blocked-' + id);
+    if (blockedRow) {
+      blockedRow.classList.add('row-removing');
+      setTimeout(() => { blockedRow.style.display = 'none'; }, 400);
+    }
+
+    // Inject into Review Queue with override flag
+    const tbody = document.querySelector('#queue-table tbody');
+    const newRow = document.createElement('tr');
+    newRow.className = 'row-red';
+    newRow.dataset.risk = 'red';
+    newRow.id = 'row-' + id;
+    newRow.style.opacity = '0';
+    newRow.innerHTML = `
+      <td class="mono">${id}</td>
+      <td>OVERRIDDEN <span class="override-badge">⚐ OVERRIDE</span></td>
+      <td>${selection}</td>
+      <td><span class="bet-type prematch">PRE</span></td>
+      <td><span class="gap-badge red"><span class="gap-dot"></span>${gap}</span></td>
+      <td class="mono">${odds}</td>
+      <td class="mono">${bet365odds}</td>
+      <td class="mono">${stake}</td>
+      <td class="muted mono">Now</td>
+      <td>
+        <div class="action-group">
+          <button class="action-btn accept" title="Accept" onclick="acceptBet('${id}', 'red')">✓ Acpt</button>
+          <button class="action-btn decline" title="Decline" onclick="showDeclineModal('${id}', '${selection}', '${gap}')">✕ Decl</button>
+          <button class="action-btn" title="Change Odds" onclick="showChangeOddsModal('${id}', '${selection}', '${odds}', '${bet365odds}', '${gap}')">✎ Odds</button>
+          <button class="action-btn escalate" title="Escalate" onclick="escalateBet('${id}', '${selection}')">↑ Escl</button>
+        </div>
+      </td>`;
+    tbody.insertBefore(newRow, tbody.firstChild);
+
+    // Fade in new row
+    setTimeout(() => { newRow.style.transition = 'opacity 0.4s'; newRow.style.opacity = '1'; }, 50);
+
+    // Update counts
+    queueCount++;
+    document.getElementById('card-queue').textContent = queueCount;
+    document.getElementById('tab-queue-count').textContent = queueCount;
+    document.getElementById('nav-queue-badge').textContent = queueCount;
+    const redCard = document.getElementById('card-red');
+    redCard.textContent = parseInt(redCard.textContent) + 1;
+    document.getElementById('pagination-info').textContent = 'Showing 1–' + queueCount + ' of ' + queueCount + ' results';
+
+    // Switch to Review Queue tab
+    const queueTab = document.querySelector('.tab');
+    switchTab('queue', queueTab);
+
+    showToast(id + ' override confirmed · Moved to Review Queue', 'amber');
+  }
+
+  document.getElementById('override-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal('override-modal');
+  });
 
   // ── THRESHOLD SAVE ──
   function saveThresholds() {
