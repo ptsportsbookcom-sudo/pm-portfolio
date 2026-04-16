@@ -1690,6 +1690,13 @@
         </select>
       </div>
       <div class="modal-field">
+        <label>New Odds <span style="color:var(--text-muted);font-weight:400">(optional — leave blank to keep current odds)</span></label>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <input class="modal-input" type="number" id="override-new-odds" step="0.01" min="1.01" placeholder="e.g. 3.90" style="width:140px;">
+          <span style="font-size:12px;color:var(--text-secondary);">Current: <span id="override-current-odds-display" style="font-family:'IBM Plex Mono',monospace;color:var(--text-primary);">—</span> · Bet365: <span id="override-bet365-display" style="font-family:'IBM Plex Mono',monospace;color:var(--blue);">—</span></span>
+        </div>
+      </div>
+      <div class="modal-field">
         <label>Notes (optional)</label>
         <textarea class="modal-textarea" placeholder="Add context for the audit log…"></textarea>
       </div>
@@ -1868,11 +1875,17 @@
     document.getElementById('override-stake').textContent = stake;
     document.getElementById('modal-subtitle-override').textContent = id + ' · ' + selection;
     document.getElementById('override-reason').value = '';
+    document.getElementById('override-new-odds').value = '';
+    document.getElementById('override-current-odds-display').textContent = odds;
+    document.getElementById('override-bet365-display').textContent = bet365odds;
     document.getElementById('override-modal').classList.add('show');
   }
 
   function confirmOverride() {
     const { id, selection, gap, odds, bet365odds, stake } = overrideBetData;
+    const newOddsInput = document.getElementById('override-new-odds').value;
+    const displayOdds = newOddsInput ? newOddsInput : odds;
+    const oddsChanged = newOddsInput && newOddsInput !== odds;
     closeModal('override-modal');
 
     // Remove from blocked log
@@ -1895,7 +1908,7 @@
       <td>${selection}</td>
       <td><span class="bet-type prematch">PRE</span></td>
       <td><span class="gap-badge red"><span class="gap-dot"></span>${gap}</span></td>
-      <td class="mono">${odds}</td>
+      <td class="mono">${displayOdds}${oddsChanged ? ' <span style="font-size:10px;color:var(--green)">✓ adj</span>' : ''}</td>
       <td class="mono">${bet365odds}</td>
       <td class="mono">${stake}</td>
       <td class="muted mono">Now</td>
@@ -1925,7 +1938,8 @@
     const queueTab = document.querySelector('.tab');
     switchTab('queue', queueTab);
 
-    showToast(id + ' override confirmed · Moved to Review Queue', 'amber');
+    const oddsMsg = oddsChanged ? ' · Odds updated to ' + displayOdds : '';
+    showToast(id + ' override confirmed · Moved to Review Queue' + oddsMsg, 'amber');
   }
 
   document.getElementById('override-modal').addEventListener('click', function(e) {
