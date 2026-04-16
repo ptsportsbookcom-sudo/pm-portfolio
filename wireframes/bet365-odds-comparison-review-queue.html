@@ -361,8 +361,10 @@
     background: var(--bg-secondary);
     border: 1px solid var(--border);
     border-radius: 8px;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
     margin-bottom: 14px;
+    -webkit-overflow-scrolling: touch;
   }
 
   table { width: 100%; border-collapse: collapse; }
@@ -505,7 +507,8 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4px;
-    width: 148px;
+    width: 140px;
+    min-width: 140px;
   }
 
   .action-btn {
@@ -1182,8 +1185,8 @@
                 <td class="muted mono">14:23:01</td>
                 <td>
                   <div class="action-group">
-                    <button class="action-btn accept" onclick="acceptBet('BET-20041', 'red')">Accept</button>
-                    <button class="action-btn decline" onclick="showDeclineModal('BET-20041', 'Man City — Match Winner Home', '16.7%')">Decline</button>
+                    <button class="action-btn accept" title="Accept" onclick="acceptBet('BET-20041', 'red')">✓ Acpt</button>
+                    <button class="action-btn decline" title="Decline" onclick="showDeclineModal('BET-20041', 'Man City — Match Winner Home', '16.7%')">✕ Decl</button>
                     <button class="action-btn" title="Change Odds" data-action="odds" onclick="showChangeOddsModal('BET-20041', 'Man City — Match Winner Home', '2.45', '2.10', '16.7%')">✎ Odds</button>
                     <button class="action-btn escalate" title="Escalate to Senior Analyst" onclick="escalateBet('BET-20041', 'Man City — Match Winner Home')">↑ Escl</button>
                   </div>
@@ -1203,8 +1206,8 @@
                 <td class="muted mono">14:25:33</td>
                 <td>
                   <div class="action-group">
-                    <button class="action-btn accept" onclick="acceptBet('BET-20042', 'amber')">Accept</button>
-                    <button class="action-btn decline" onclick="showDeclineModal('BET-20042', 'Real Madrid — Over 2.5', '9.7%')">Decline</button>
+                    <button class="action-btn accept" title="Accept" onclick="acceptBet('BET-20042', 'amber')">✓ Acpt</button>
+                    <button class="action-btn decline" title="Decline" onclick="showDeclineModal('BET-20042', 'Real Madrid — Over 2.5', '9.7%')">✕ Decl</button>
                     <button class="action-btn" title="Change Odds" data-action="odds" onclick="showChangeOddsModal('BET-20042', 'Real Madrid — Over 2.5', '1.92', '1.75', '9.7%')">✎ Odds</button>
                     <button class="action-btn escalate" title="Escalate to Senior Analyst" onclick="escalateBet('BET-20042', 'Real Madrid — Over 2.5')">↑ Escl</button>
                   </div>
@@ -1224,8 +1227,8 @@
                 <td class="muted mono">14:28:45</td>
                 <td>
                   <div class="action-group">
-                    <button class="action-btn accept" onclick="acceptBet('BET-20043', 'amber')">Accept</button>
-                    <button class="action-btn decline" onclick="showDeclineModal('BET-20043', 'Chelsea — Match Winner Away', '10.5%')">Decline</button>
+                    <button class="action-btn accept" title="Accept" onclick="acceptBet('BET-20043', 'amber')">✓ Acpt</button>
+                    <button class="action-btn decline" title="Decline" onclick="showDeclineModal('BET-20043', 'Chelsea — Match Winner Away', '10.5%')">✕ Decl</button>
                     <button class="action-btn" title="Change Odds" data-action="odds" onclick="showChangeOddsModal('BET-20043', 'Chelsea — Match Winner Away', '4.20', '3.80', '10.5%')">✎ Odds</button>
                     <button class="action-btn escalate" title="Escalate to Senior Analyst" onclick="escalateBet('BET-20043', 'Chelsea — Match Winner Away')">↑ Escl</button>
                   </div>
@@ -1245,8 +1248,8 @@
                 <td class="muted mono">14:27:02</td>
                 <td>
                   <div class="action-group">
-                    <button class="action-btn accept" onclick="acceptBet('BET-20044', 'amber')">Accept</button>
-                    <button class="action-btn decline" onclick="showDeclineModal('BET-20044', 'PSG — Asian HCP -1', '10.3%')">Decline</button>
+                    <button class="action-btn accept" title="Accept" onclick="acceptBet('BET-20044', 'amber')">✓ Acpt</button>
+                    <button class="action-btn decline" title="Decline" onclick="showDeclineModal('BET-20044', 'PSG — Asian HCP -1', '10.3%')">✕ Decl</button>
                     <button class="action-btn" title="Change Odds" data-action="odds" onclick="showChangeOddsModal('BET-20044', 'PSG — Asian HCP -1', '2.15', '1.95', '10.3%')">✎ Odds</button>
                     <button class="action-btn escalate" title="Escalate to Senior Analyst" onclick="escalateBet('BET-20044', 'PSG — Asian HCP -1')">↑ Escl</button>
                   </div>
@@ -1266,8 +1269,8 @@
                 <td class="muted mono">14:29:10</td>
                 <td>
                   <div class="action-group">
-                    <button class="action-btn accept" onclick="acceptBet('BET-20045', 'amber')">Accept</button>
-                    <button class="action-btn decline" onclick="showDeclineModal('BET-20045', 'Bayern — Over 3.5', '11.8%')">Decline</button>
+                    <button class="action-btn accept" title="Accept" onclick="acceptBet('BET-20045', 'amber')">✓ Acpt</button>
+                    <button class="action-btn decline" title="Decline" onclick="showDeclineModal('BET-20045', 'Bayern — Over 3.5', '11.8%')">✕ Decl</button>
                     <button class="action-btn" title="Change Odds" data-action="odds" onclick="showChangeOddsModal('BET-20045', 'Bayern — Over 3.5', '2.85', '2.55', '11.8%')">✎ Odds</button>
                     <button class="action-btn escalate" title="Escalate to Senior Analyst" onclick="escalateBet('BET-20045', 'Bayern — Over 3.5')">↑ Escl</button>
                   </div>
@@ -1287,8 +1290,8 @@
                 <td class="muted mono">14:24:15</td>
                 <td>
                   <div class="action-group">
-                    <button class="action-btn accept" onclick="acceptBet('BET-20046', 'green')">Accept</button>
-                    <button class="action-btn decline" onclick="showDeclineModal('BET-20046', 'Liverpool — BTTS Yes', '3.9%')">Decline</button>
+                    <button class="action-btn accept" title="Accept" onclick="acceptBet('BET-20046', 'green')">✓ Acpt</button>
+                    <button class="action-btn decline" title="Decline" onclick="showDeclineModal('BET-20046', 'Liverpool — BTTS Yes', '3.9%')">✕ Decl</button>
                     <button class="action-btn" title="Change Odds" data-action="odds" onclick="showChangeOddsModal('BET-20046', 'Liverpool — BTTS Yes', '1.85', '1.78', '3.9%')">✎ Odds</button>
                     <button class="action-btn escalate" title="Escalate to Senior Analyst" onclick="escalateBet('BET-20046', 'Liverpool — BTTS Yes')">↑ Escl</button>
                   </div>
@@ -1308,8 +1311,8 @@
                 <td class="muted mono">14:28:11</td>
                 <td>
                   <div class="action-group">
-                    <button class="action-btn accept" onclick="acceptBet('BET-20047', 'negative')">Accept</button>
-                    <button class="action-btn decline" onclick="showDeclineModal('BET-20047', 'Inter — Match Winner Home', '-2.3%')">Decline</button>
+                    <button class="action-btn accept" title="Accept" onclick="acceptBet('BET-20047', 'negative')">✓ Acpt</button>
+                    <button class="action-btn decline" title="Decline" onclick="showDeclineModal('BET-20047', 'Inter — Match Winner Home', '-2.3%')">✕ Decl</button>
                     <button class="action-btn" title="Change Odds" data-action="odds" onclick="showChangeOddsModal('BET-20047', 'Inter — Match Winner Home', '1.68', '1.72', '-2.3%')">✎ Odds</button>
                     <button class="action-btn escalate" title="Escalate to Senior Analyst" onclick="escalateBet('BET-20047', 'Inter — Match Winner Home')">↑ Escl</button>
                   </div>
@@ -1329,8 +1332,8 @@
                 <td class="muted mono">14:26:44</td>
                 <td>
                   <div class="action-group">
-                    <button class="action-btn accept" onclick="acceptBet('BET-20048', 'na')">Accept</button>
-                    <button class="action-btn decline" onclick="showDeclineModal('BET-20048', 'Tottenham — Match Winner Away', 'N/A')">Decline</button>
+                    <button class="action-btn accept" title="Accept" onclick="acceptBet('BET-20048', 'na')">✓ Acpt</button>
+                    <button class="action-btn decline" title="Decline" onclick="showDeclineModal('BET-20048', 'Tottenham — Match Winner Away', 'N/A')">✕ Decl</button>
                     <button class="action-btn" title="Change Odds" data-action="odds" onclick="showChangeOddsModal('BET-20048', 'Tottenham — Match Winner Away', '3.40', '—', 'N/A')">✎ Odds</button>
                     <button class="action-btn escalate" title="Escalate to Senior Analyst" onclick="escalateBet('BET-20048', 'Tottenham — Match Winner Away')">↑ Escl</button>
                   </div>
