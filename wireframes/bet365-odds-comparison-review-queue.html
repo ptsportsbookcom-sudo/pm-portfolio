@@ -517,6 +517,38 @@
     cursor: help;
   }
 
+  /* CHECK FAILED ROW — F19: auto-block check timed out, bet held in queue */
+  tbody tr.row-check-failed {
+    border-left: 3px solid #f97316;
+    background: rgba(249,115,22,0.04);
+  }
+
+  .gap-badge.check-failed {
+    background: rgba(249,115,22,0.12);
+    color: #f97316;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  /* THRESHOLD CHANGE WARNING — F20: classification would differ under updated thresholds */
+  .threshold-warn {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 10px;
+    color: #60a5fa;
+    background: rgba(59,130,246,0.10);
+    border: 1px solid rgba(59,130,246,0.25);
+    border-radius: 3px;
+    padding: 1px 5px;
+    margin-left: 4px;
+    cursor: help;
+    font-weight: 500;
+  }
+
   /* ACTION BUTTONS IN TABLE */
   .action-group {
     display: grid;
@@ -1277,7 +1309,7 @@
                 <td>MLT_7723</td>
                 <td>Bayern v Dortmund <span style="color:var(--text-secondary)">· Over 3.5</span></td>
                 <td><span class="bet-type prematch">PRE</span></td>
-                <td><span class="gap-badge amber"><span class="gap-dot"></span>+11.8%</span></td>
+                <td><span class="gap-badge amber"><span class="gap-dot"></span>+11.8%</span> <span class="threshold-warn" title="Thresholds updated since this bet was queued — original classification: Amber (pre-match 5–15%). Current threshold lowers Amber upper bound to 10%. This bet would now classify as Red.">⚡ Threshold changed — original: Amber</span></td>
                 <td class="mono">2.85</td>
                 <td class="mono">2.55</td>
                 <td class="mono">£290.00</td>
@@ -1334,7 +1366,28 @@
                 </td>
               </tr>
 
-              <!-- ROW 8 — N/A -->
+              <!-- ROW 8 — CHECK FAILED (F19: auto-block check timed out, held in queue) -->
+              <tr class="row-check-failed" data-risk="check-failed" id="row-BET-20049">
+                <td class="mono">BET-20049</td>
+                <td>MLT_8841</td>
+                <td>Atletico v Villarreal <span style="color:var(--text-secondary)">· Match Winner Home</span></td>
+                <td><span class="bet-type prematch">PRE</span></td>
+                <td><span class="gap-badge check-failed">Check Failed</span></td>
+                <td class="mono">2.10</td>
+                <td class="muted mono">—</td>
+                <td class="mono">£350.00</td>
+                <td class="muted mono">14:31:05</td>
+                <td>
+                  <div class="action-group">
+                    <button class="action-btn accept" title="Accept" onclick="acceptBet('BET-20049', 'check-failed')">✓ Acpt</button>
+                    <button class="action-btn decline" title="Decline" onclick="showDeclineModal('BET-20049', 'Atletico — Match Winner Home', 'Check Failed')">✕ Decl</button>
+                    <button class="action-btn" title="Change Odds" data-action="odds" onclick="showChangeOddsModal('BET-20049', 'Atletico — Match Winner Home', '2.10', '—', 'N/A')">✎ Odds</button>
+                    <button class="action-btn escalate" title="Escalate to Senior Analyst" onclick="escalateBet('BET-20049', 'Atletico — Match Winner Home')">↑ Escl</button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- ROW 9 — N/A -->
               <tr class="row-na" data-risk="na" id="row-BET-20048">
                 <td class="mono">BET-20048</td>
                 <td>CYP_1102</td>
@@ -1361,7 +1414,7 @@
 
         <!-- PAGINATION -->
         <div class="pagination">
-          <div class="pagination-info" id="pagination-info">Showing 1–8 of 8 results</div>
+          <div class="pagination-info" id="pagination-info">Showing 1–9 of 9 results</div>
           <div class="pagination-controls">
             <button class="page-btn">‹</button>
             <button class="page-btn active">1</button>
