@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B2Tech Strategy Dashboard FY2026</title>
+<script src="b2tech-dashboard-data.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0d1117;--card:#161b27;--card2:#1a2133;--border:#253047;
+  --teal:#00c9a7;--teal-d:rgba(0,201,167,.12);--teal-b:rgba(0,201,167,.25);
+  --amber:#f59e0b;--amber-d:rgba(245,158,11,.12);
+  --red:#ef4444;--red-d:rgba(239,68,68,.12);
+  --green:#22c55e;--green-d:rgba(34,197,94,.12);
+  --blue:#3b82f6;--blue-d:rgba(59,130,246,.12);
+  --purple:#a855f7;--purple-d:rgba(168,85,247,.12);
+  --text:#e2e8f0;--muted:#64748b;--subtle:#94a3b8;
+}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:13px;line-height:1.5;min-height:100vh}
+
+/* HEADER */
+.hdr{background:linear-gradient(135deg,#0d1117,#111827);border-bottom:1px solid var(--border);padding:18px 28px;display:flex;align-items:center;justify-content:space-between}
+.hdr-l{display:flex;align-items:center;gap:14px}
+.logo{width:38px;height:38px;background:var(--teal);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;color:#0d1117}
+.hdr-title h1{font-size:17px;font-weight:700}
+.hdr-title p{font-size:11px;color:var(--muted);margin-top:2px}
+.hdr-r{display:flex;align-items:center;gap:10px}
+.badge{padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:.5px}
+.badge-conf{background:var(--red-d);color:#fca5a5;border:1px solid rgba(239,68,68,.3)}
+.badge-int{background:var(--teal-d);color:var(--teal);border:1px solid var(--teal-b)}
+.threat-badge{padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700}
+.threat-Critical{background:var(--red-d);color:var(--red);border:1px solid rgba(239,68,68,.3)}
+.threat-High{background:var(--amber-d);color:var(--amber);border:1px solid rgba(245,158,11,.3)}
+.threat-Medium{background:rgba(234,179,8,.12);color:#facc15;border:1px solid rgba(234,179,8,.3)}
+.threat-Low{background:var(--green-d);color:var(--green);border:1px solid rgba(34,197,94,.3)}
+.updated{font-size:11px;color:var(--muted)}
+
+/* STALE BANNER */
+.stale-banner{background:var(--amber-d);border-bottom:1px solid rgba(245,158,11,.3);padding:8px 28px;font-size:11px;color:var(--amber);display:flex;gap:8px;align-items:center}
+
+/* TABS */
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--border);padding:0 28px;background:#0d1117}
+.tab{padding:12px 20px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none}
+.tab:hover{color:var(--subtle)}
+.tab.active{color:var(--teal);border-bottom-color:var(--teal)}
+
+/* MAIN */
+.main{padding:24px 28px;max-width:1440px;margin:0 auto}
+.tab-content{display:none}.tab-content.active{display:block}
+
+/* SECTION LABEL */
+.sl{font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.sl::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* NSM CARDS */
+.nsm-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+.nsm-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px;position:relative;overflow:hidden;cursor:default;transition:border-color .2s}
+.nsm-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.nsm-card.teal::before{background:var(--teal)}.nsm-card.amber::before{background:var(--amber)}.nsm-card.purple::before{background:var(--purple)}
+.nsm-card:hover{border-color:var(--teal)}
+.nsm-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px}
+.nsm-val{font-size:40px;font-weight:800;line-height:1;margin-bottom:5px}
+.nsm-card.teal .nsm-val{color:var(--teal)}.nsm-card.amber .nsm-val{color:var(--amber)}.nsm-card.purple .nsm-val{color:var(--purple)}
+.nsm-sub{font-size:11px;color:var(--subtle);margin-bottom:14px}
+.nsm-tgt{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.04);border-radius:6px;padding:7px 10px}
+.nsm-tgt-l{font-size:10px;color:var(--muted)}.nsm-tgt-v{font-size:10px;font-weight:700}
+.nsm-card.teal .nsm-tgt-v{color:var(--teal)}.nsm-card.amber .nsm-tgt-v{color:var(--amber)}.nsm-card.purple .nsm-tgt-v{color:var(--purple)}
+.trend{font-size:16px;position:absolute;top:20px;right:20px;opacity:.5}
+
+/* KPI CARDS */
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+.kpi-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;display:flex;align-items:flex-start;gap:10px}
+.kpi-icon{font-size:20px;line-height:1}
+.kpi-val{font-size:19px;font-weight:700}.kpi-name{font-size:10px;color:var(--muted);margin-top:2px}.kpi-qtr{font-size:10px;color:var(--teal);font-weight:600;margin-top:5px}
+
+/* TOP OPPORTUNITIES */
+.opp-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+.opp-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.opp-rank{font-size:10px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:1px}
+.opp-name{font-size:13px;font-weight:700}
+.opp-pain{font-size:11px;color:var(--subtle)}
+.opp-cov{font-size:10px;color:var(--muted);margin-top:2px}
+.nsm-dots{display:flex;gap:6px;align-items:center;margin-top:4px}
+.nsm-dot-label{font-size:9px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-right:2px}
+.dot{width:10px;height:10px;border-radius:50%}
+.dot-high{background:var(--teal)}.dot-medium{background:var(--amber)}.dot-low{background:var(--border)}.dot-none{background:var(--border);opacity:.4}
+.opp-quote{font-size:10px;color:var(--muted);font-style:italic;border-left:2px solid var(--border);padding-left:8px;margin-top:4px}
+.effort-tag{font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;align-self:flex-start}
+.effort-Low{background:var(--green-d);color:var(--green)}.effort-Medium{background:var(--amber-d);color:var(--amber)}.effort-High{background:var(--red-d);color:#fca5a5}
+
+/* PORTER'S */
+.porter-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px}
+.porter-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px}
+.porter-name{font-size:10px;font-weight:700;color:var(--subtle);margin-bottom:8px;min-height:28px}
+.porter-score{font-size:13px;font-weight:700;margin-bottom:6px}
+.porter-High{color:var(--red)}.porter-Medium{color:var(--amber)}.porter-Low{color:var(--green)}
+.porter-bar{height:4px;border-radius:4px;background:rgba(255,255,255,.08);margin-bottom:8px;overflow:hidden}
+.porter-fill-High{background:var(--red);width:100%}.porter-fill-Medium{background:var(--amber);width:60%}.porter-fill-Low{background:var(--green);width:30%}
+.porter-rationale{font-size:10px;color:var(--muted)}
+
+/* KEY QUOTE */
+.key-quote{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:10px;padding:16px 20px;margin-bottom:20px}
+.key-quote blockquote{font-size:14px;color:var(--text);font-style:italic;margin-bottom:6px}
+.key-quote cite{font-size:10px;color:var(--muted)}
+
+/* TWO COL */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px}
+.panel-title{font-size:13px;font-weight:700;margin-bottom:4px}.panel-sub{font-size:11px;color:var(--muted);margin-bottom:14px}
+
+/* HEATMAP */
+.hmap{width:100%;border-collapse:collapse;font-size:11px}
+.hmap th{font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;padding:5px 6px;text-align:center;border-bottom:1px solid var(--border)}
+.hmap th:first-child{text-align:left}
+.hmap td{padding:7px 6px;text-align:center;border-bottom:1px solid rgba(255,255,255,.04)}
+.hmap td:first-child{text-align:left;font-weight:600;color:var(--subtle);font-size:12px;padding-left:0}
+.hmap tr.own td{background:rgba(0,201,167,.05)}.hmap tr.own td:first-child{color:var(--teal)}
+.pill{display:inline-block;padding:2px 7px;border-radius:4px;font-size:9px;font-weight:600;white-space:nowrap}
+.pill-Mature{background:var(--green-d);color:var(--green)}.pill-Established{background:var(--amber-d);color:var(--amber)}.pill-Early{background:var(--red-d);color:#fca5a5}
+.legend{display:flex;gap:14px;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+.legend-i{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--muted)}
+.legend-dot{width:8px;height:8px;border-radius:2px}
+
+/* OKR PROGRESS */
+.okr-goal{margin-bottom:16px}.okr-goal:last-child{margin-bottom:0}
+.okr-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.okr-name{font-size:11px;font-weight:700}.okr-pct{font-size:11px;font-weight:700}
+.okr-obj{font-size:10px;color:var(--muted);margin-bottom:6px}
+.prog-bar{height:4px;background:rgba(255,255,255,.08);border-radius:10px;overflow:hidden;margin-bottom:8px}
+.prog-fill{height:100%;border-radius:10px}
+.qbadge{font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;background:var(--teal-d);color:var(--teal)}
+.okr-krs{display:flex;flex-direction:column;gap:3px}
+.okr-kr{font-size:10px;color:var(--muted);display:flex;align-items:flex-start;gap:5px}
+.okr-kr::before{content:'→';color:var(--teal);flex-shrink:0}
+
+/* NSM IMPACT TABLE */
+.nsm-table{width:100%;border-collapse:collapse;font-size:11px;margin-top:4px}
+.nsm-table th{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;padding:8px 10px;text-align:left;border-bottom:1px solid var(--border);cursor:pointer;user-select:none;white-space:nowrap}
+.nsm-table th:hover{color:var(--subtle)}
+.nsm-table th.sort-asc::after{content:' ↑'}.nsm-table th.sort-desc::after{content:' ↓'}
+.nsm-table td{padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle}
+.nsm-table tr:last-child td{border-bottom:none}
+.nsm-impact{display:inline-block;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:700}
+.nsm-High{background:var(--teal-d);color:var(--teal)}.nsm-Medium{background:var(--amber-d);color:var(--amber)}
+.nsm-Low{background:rgba(255,255,255,.06);color:var(--muted)}.nsm-None{background:rgba(255,255,255,.03);color:var(--border)}
+.prio-badge{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;font-size:11px;font-weight:800;background:var(--teal-d);color:var(--teal)}
+
+/* BETS */
+.bet-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.bet-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.bet-num{font-size:10px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:1px}
+.bet-title{font-size:13px;font-weight:700}
+.bet-desc{font-size:11px;color:var(--subtle);flex:1}
+.bet-moat{background:var(--teal-d);border:1px solid rgba(0,201,167,.2);border-radius:6px;padding:8px 10px}
+.bet-moat-l{font-size:9px;color:var(--teal);font-weight:700;margin-bottom:2px}
+.bet-moat-v{font-size:10px;color:var(--subtle)}
+.bet-risk{background:var(--amber-d);border:1px solid rgba(245,158,11,.2);border-radius:6px;padding:8px 10px}
+.bet-risk-l{font-size:9px;color:var(--amber);font-weight:700;margin-bottom:2px}
+.bet-risk-v{font-size:10px;color:var(--subtle)}
+
+/* WHITESPACE */
+.gap-table{width:100%;border-collapse:collapse}
+.gap-table th{font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;padding:0 0 8px;border-bottom:1px solid var(--border);text-align:left}
+.gap-table th:not(:first-child){text-align:center}
+.gap-table td{padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle}
+.gap-table td:not(:first-child){text-align:center}
+.gap-name{font-size:11px;font-weight:600}.gap-sub{font-size:10px;color:var(--muted);margin-top:1px}
+.cov-red{font-size:10px;font-weight:700;color:var(--red)}.cov-amber{font-size:10px;font-weight:700;color:var(--amber)}.cov-green{font-size:10px;font-weight:700;color:var(--green)}
+.rtag{font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px}
+.rtag-bet{background:var(--teal-d);color:var(--teal);border:1px solid rgba(0,201,167,.2)}
+.rtag-strength{background:var(--green-d);color:var(--green);border:1px solid rgba(34,197,94,.2)}
+.rtag-roadmap{background:var(--blue-d);color:#93c5fd;border:1px solid rgba(59,130,246,.2)}
+
+/* QUOTES */
+.quotes-list{display:flex;flex-direction:column;gap:10px}
+.quote-item{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--border);border-radius:8px;padding:12px 14px}
+.quote-item.pain{border-left-color:var(--amber)}.quote-item.opportunity{border-left-color:var(--teal)}.quote-item.threat{border-left-color:var(--red)}
+.quote-text{font-size:12px;color:var(--subtle);font-style:italic;margin-bottom:5px}
+.quote-src{font-size:10px;color:var(--muted)}
+
+/* FILE PICKER */
+.file-update{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.file-btn{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:7px 14px;font-size:11px;color:var(--subtle);cursor:pointer;transition:all .2s}
+.file-btn:hover{border-color:var(--teal);color:var(--teal)}
+.file-note{font-size:10px;color:var(--muted)}
+
+/* FOOTER */
+.footer{border-top:1px solid var(--border);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;margin-top:8px}
+.footer-l,.footer-r{font-size:10px;color:var(--muted)}
+
+/* DIVIDER */
+.div{height:1px;background:var(--border);margin:8px 0 20px}
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+const D = window.DASHBOARD_DATA;
+const threatColors = {Critical:'var(--red)',High:'var(--amber)',Medium:'#facc15',Low:'var(--green)'};
+
+function pill(score){
+  const s = score.replace(' →','');
+  return `<span class="pill pill-${s}">${score}</span>`;
+}
+function nsmImpact(v){return `<span class="nsm-impact nsm-${v}">${v}</span>`;}
+function dot(v){return `<span class="dot dot-${v}" title="${v}"></span>`;}
+function effortTag(e){return `<span class="effort-tag effort-${e}">${e} effort</span>`;}
+
+function renderHeader(){
+  const tl = D.portersFiveForces.threatLevel;
+  return `
+  <div class="hdr">
+    <div class="hdr-l">
+      <div class="logo">${D.meta.company.slice(0,2).toUpperCase()}</div>
+      <div class="hdr-title">
+        <h1>${D.meta.company} ${D.meta.title}</h1>
+        <p>${D.meta.year} · ${D.meta.audience}</p>
+      </div>
+    </div>
+    <div class="hdr-r">
+      <span class="badge badge-conf">Confidential</span>
+      <span class="badge badge-int">Internal Leadership</span>
+      <span class="threat-badge threat-${tl}">⚠ Threat: ${tl}</span>
+      <span class="updated">Updated ${D.meta.updatedDate}</span>
+    </div>
+  </div>
+  ${D.staleDataFlags.length > 0 ? `<div class="stale-banner">⚠ Stale data: ${D.staleDataFlags.map(f=>`${f.doc} (${f.age})`).join(', ')}</div>` : ''}`;
+}
+
+function renderTabs(){
+  return `
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('exec',this)">Executive View</button>
+    <button class="tab" onclick="switchTab('deep',this)">Deep Dive</button>
+  </div>`;
+}
+
+function renderExecutiveView(){
+  // NSM Cards
+  const nsmCards = D.northStarMetrics.map(m=>`
+    <div class="nsm-card ${m.color}">
+      <div class="nsm-label">${m.label}</div>
+      <div class="trend">${m.trend}</div>
+      <div class="nsm-val">${m.value}</div>
+      <div class="nsm-sub">${m.sub}</div>
+      <div class="nsm-tgt">
+        <span class="nsm-tgt-l">Target · ${m.targetQuarter}</span>
+        <span class="nsm-tgt-v">${m.target}</span>
+      </div>
+    </div>`).join('');
+
+  // Top Opportunities
+  const oppCards = D.topOpportunities.map(o=>`
+    <div class="opp-card">
+      <div class="opp-rank">#${o.rank} Opportunity</div>
+      <div class="opp-name">${o.name}</div>
+      <div class="opp-pain">${o.pain}</div>
+      <div class="opp-cov">${o.competitorCoverage}</div>
+      <div class="nsm-dots">
+        <span class="nsm-dot-label">NSM</span>
+        ${dot(o.nsmImpact.nsm1)}${dot(o.nsmImpact.nsm2)}${dot(o.nsmImpact.nsm3)}
+        ${effortTag(o.effort)}
+      </div>
+      <div class="opp-quote">"${o.quote}"</div>
+    </div>`).join('');
+
+  // Porter's
+  const porterCards = D.portersFiveForces.forces.map(f=>`
+    <div class="porter-card">
+      <div class="porter-name">${f.name}</div>
+      <div class="porter-score porter-${f.score}">${f.score}</div>
+      <div class="porter-bar"><div class="porter-fill-${f.score}"></div></div>
+      <div class="porter-rationale">${f.rationale}</div>
+    </div>`).join('');
+
+  // Key Quote (first opportunity theme)
+  const kq = D.keyQuotes[0];
+
+  return `
+  <div class="tab-content active" id="tab-exec">
+    <div class="main">
+      <div class="sl">North Star Metrics</div>
+      <div class="nsm-row">${nsmCards}</div>
+
+      <div class="sl">Top Opportunities — NSM Impact</div>
+      <div class="opp-row">${oppCards}</div>
+
+      <div class="sl">Competitive Threat Assessment — Porter's Five Forces</div>
+      <div class="porter-grid">${porterCards}</div>
+
+      <div class="sl">Key Insight</div>
+      <div class="key-quote">
+        <blockquote>"${kq.quote}"</blockquote>
+        <cite>— ${kq.source}</cite>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderDeepDive(){
+  // KPI Cards
+  const kpiCards = D.kpiCards.map(k=>`
+    <div class="kpi-card">
+      <div class="kpi-icon">${k.icon}</div>
+      <div>
+        <div class="kpi-val">${k.value}</div>
+        <div class="kpi-name">${k.name}</div>
+        <div class="kpi-qtr">${k.quarter}</div>
+      </div>
+    </div>`).join('');
+
+  // Heatmap
+  const cats = D.featureCategories;
+  const hdrCells = cats.map(c=>`<th>${c}</th>`).join('');
+  const rows = D.competitors.map(c=>`
+    <tr class="${c.isOwn?'own':''}">
+      <td>${c.isOwn?'▶ ':''}<strong>${c.name}</strong></td>
+      ${cats.map(cat=>`<td>${pill(c.scores[cat]||'Gap')}</td>`).join('')}
+    </tr>`).join('');
+
+  // OKR Goals
+  const colors = {teal:'var(--teal)',amber:'var(--amber)',purple:'var(--purple)',blue:'var(--blue)'};
+  const okrGoals = D.okrGoals.map(g=>`
+    <div class="okr-goal">
+      <div class="okr-hdr">
+        <span class="okr-name">${g.name}</span>
+        <span style="display:flex;gap:6px;align-items:center;"><span class="qbadge">${g.quarter}</span><span class="okr-pct" style="color:${colors[g.color]}">${g.progress}%</span></span>
+      </div>
+      <div class="okr-obj">${g.objective}</div>
+      <div class="prog-bar"><div class="prog-fill" style="width:${g.progress}%;background:${colors[g.color]}"></div></div>
+      <div class="okr-krs">${g.krs.map(kr=>`<div class="okr-kr">${kr}</div>`).join('')}</div>
+    </div>`).join('');
+
+  // NSM Impact Map Table
+  const nsm1Label = D.northStarMetrics[0]?.label || 'NSM 1';
+  const nsm2Label = D.northStarMetrics[1]?.label || 'NSM 2';
+  const nsm3Label = D.northStarMetrics[2]?.label || 'NSM 3';
+  const impactRows = D.nsmImpactMap.map(r=>`
+    <tr>
+      <td><span class="prio-badge">${r.priority}</span></td>
+      <td><strong>${r.opportunity}</strong></td>
+      <td>${nsmImpact(r.nsm1Impact)}</td>
+      <td>${nsmImpact(r.nsm2Impact)}</td>
+      <td>${nsmImpact(r.nsm3Impact)}</td>
+      <td><span class="effort-tag effort-${r.effort}">${r.effort}</span></td>
+      <td style="font-size:10px;color:var(--muted);max-width:200px">${r.reasoning}</td>
+    </tr>`).join('');
+
+  // Strategic Bets
+  const bets = D.strategicBets.map(b=>`
+    <div class="bet-card">
+      <div class="bet-num">Bet ${b.number}</div>
+      <div class="bet-title">${b.title}</div>
+      <div class="bet-desc">${b.description}</div>
+      <div class="bet-moat"><div class="bet-moat-l">Competitive Moat Against</div><div class="bet-moat-v">${b.moatAgainst} — ${b.moatDesc}</div></div>
+      <div class="bet-risk"><div class="bet-risk-l">⚠ Key Risk</div><div class="bet-risk-v">${b.risk}</div></div>
+    </div>`).join('');
+
+  // Whitespace
+  const gapRows = D.whitespaceGaps.map(g=>{
+    const covClass = `cov-${g.coverageColor}`;
+    const tagClass = g.b2techStatus==='bet'?'rtag-bet':g.b2techStatus==='strength'?'rtag-strength':'rtag-roadmap';
+    return `<tr>
+      <td><div class="gap-name">${g.name}</div><div class="gap-sub">${g.sub}</div></td>
+      <td><span class="${covClass}">${g.coverage}</span></td>
+      <td><span class="rtag ${tagClass}">${g.label}</span></td>
+    </tr>`;}).join('');
+
+  // Quotes
+  const quoteItems = D.keyQuotes.map(q=>`
+    <div class="quote-item ${q.theme}">
+      <div class="quote-text">"${q.quote}"</div>
+      <div class="quote-src">— ${q.source}</div>
+    </div>`).join('');
+
+  return `
+  <div class="tab-content" id="tab-deep">
+    <div class="main">
+      <div class="file-update">
+        <label class="file-btn">📂 Update Dashboard Data <input type="file" accept=".js" style="display:none" onchange="loadDataFile(this)"></label>
+        <span class="file-note">Load a new data.js file to refresh without changing the UI</span>
+      </div>
+
+      <div class="sl">OKR Targets</div>
+      <div class="kpi-row">${kpiCards}</div>
+      <div class="div"></div>
+
+      <div class="sl">Competitive Feature Heatmap & OKR Progress</div>
+      <div class="two-col">
+        <div class="panel">
+          <div class="panel-title">Feature Heatmap</div>
+          <div class="panel-sub">Maturity across 6 categories · B2Tech vs 5 competitors</div>
+          <table class="hmap">
+            <thead><tr><th style="width:110px;">Competitor</th>${hdrCells}</tr></thead>
+            <tbody>${rows}</tbody>
+          </table>
+          <div class="legend">
+            <div class="legend-i"><div class="legend-dot" style="background:#22c55e"></div>Mature</div>
+            <div class="legend-i"><div class="legend-dot" style="background:#f59e0b"></div>Established</div>
+            <div class="legend-i"><div class="legend-dot" style="background:#ef4444"></div>Early</div>
+            <div class="legend-i" style="margin-left:auto;font-size:10px;color:var(--teal)">▶ = B2Tech</div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-title">OKR Progress</div>
+          <div class="panel-sub">FY2026 · Placeholder baselines — update with actuals</div>
+          ${okrGoals}
+        </div>
+      </div>
+      <div class="div"></div>
+
+      <div class="sl">NSM Impact Map — All Opportunities Ranked</div>
+      <div class="panel" style="margin-bottom:14px">
+        <div class="panel-title">Opportunity Prioritisation by North Star Metric Impact</div>
+        <div class="panel-sub">Click column headers to sort · Replaces RICE scoring</div>
+        <table class="nsm-table" id="nsm-impact-table">
+          <thead>
+            <tr>
+              <th data-col="priority">Priority</th>
+              <th data-col="opportunity">Opportunity</th>
+              <th data-col="nsm1Impact">${nsm1Label}</th>
+              <th data-col="nsm2Impact">${nsm2Label}</th>
+              <th data-col="nsm3Impact">${nsm3Label}</th>
+              <th data-col="effort">Effort</th>
+              <th>Reasoning</th>
+            </tr>
+          </thead>
+          <tbody>${impactRows}</tbody>
+        </table>
+      </div>
+      <div class="div"></div>
+
+      <div class="sl">Strategic Bets & Market Whitespace</div>
+      <div class="two-col" style="margin-bottom:14px">
+        <div class="panel">
+          <div class="panel-title">Strategic Bets</div>
+          <div class="panel-sub">FY2026 core investments — competitive moat plays</div>
+          <div class="bet-grid">${bets}</div>
+        </div>
+        <div class="panel">
+          <div class="panel-title">Market Whitespace</div>
+          <div class="panel-sub">Capability gaps across all competitors — B2Tech opportunity space</div>
+          <table class="gap-table">
+            <thead><tr><th>Gap</th><th>Coverage</th><th>B2Tech</th></tr></thead>
+            <tbody>${gapRows}</tbody>
+          </table>
+        </div>
+      </div>
+      <div class="div"></div>
+
+      <div class="sl">Key Quotes from Source Documents</div>
+      <div class="quotes-list">${quoteItems}</div>
+    </div>
+  </div>`;
+}
+
+function renderFooter(){
+  return `
+  <div class="footer">
+    <div class="footer-l">🔒 Confidential — Internal Use Only · ${D.meta.company} · ${D.meta.year}</div>
+    <div class="footer-r">Docs processed: ${D.meta.docsProcessed.join(', ')} · ${D.meta.updatedDate}</div>
+  </div>`;
+}
+
+function render(){
+  document.getElementById('app').innerHTML =
+    renderHeader() + renderTabs() + renderExecutiveView() + renderDeepDive() + renderFooter();
+  document.title = `${D.meta.company} ${D.meta.title} ${D.meta.year}`;
+}
+
+function switchTab(name, btn){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(`tab-${name}`).classList.add('active');
+}
+
+const impactOrder = {High:3,Medium:2,Low:1,None:0};
+const effortOrder = {Low:1,Medium:2,High:3};
+function initSortableTable(){
+  const table = document.getElementById('nsm-impact-table');
+  if(!table) return;
+  let sortCol = null, sortDir = 1;
+  table.querySelectorAll('th[data-col]').forEach(th=>{
+    th.addEventListener('click',()=>{
+      const col = th.dataset.col;
+      if(sortCol===col) sortDir*=-1; else {sortCol=col;sortDir=1;}
+      table.querySelectorAll('th').forEach(t=>{t.classList.remove('sort-asc','sort-desc');});
+      th.classList.add(sortDir===1?'sort-asc':'sort-desc');
+      const data=[...D.nsmImpactMap].sort((a,b)=>{
+        let av=a[col],bv=b[col];
+        if(col.includes('Impact')){av=impactOrder[av]??0;bv=impactOrder[bv]??0;}
+        else if(col==='effort'){av=effortOrder[av]??0;bv=effortOrder[bv]??0;}
+        else{av=typeof av==='number'?av:av?.toString().toLowerCase()??'';bv=typeof bv==='number'?bv:bv?.toString().toLowerCase()??'';}
+        return av<bv?-sortDir:av>bv?sortDir:0;
+      });
+      const nsm1L=D.northStarMetrics[0]?.label||'NSM 1';
+      const nsm2L=D.northStarMetrics[1]?.label||'NSM 2';
+      const nsm3L=D.northStarMetrics[2]?.label||'NSM 3';
+      table.querySelector('tbody').innerHTML=data.map(r=>`
+        <tr>
+          <td><span class="prio-badge">${r.priority}</span></td>
+          <td><strong>${r.opportunity}</strong></td>
+          <td>${nsmImpact(r.nsm1Impact)}</td>
+          <td>${nsmImpact(r.nsm2Impact)}</td>
+          <td>${nsmImpact(r.nsm3Impact)}</td>
+          <td><span class="effort-tag effort-${r.effort}">${r.effort}</span></td>
+          <td style="font-size:10px;color:var(--muted);max-width:200px">${r.reasoning}</td>
+        </tr>`).join('');
+    });
+  });
+}
+
+function loadDataFile(input){
+  const file = input.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e=>{
+    try{
+      const script = document.createElement('script');
+      script.textContent = e.target.result;
+      document.head.appendChild(script);
+      render();
+      initSortableTable();
+    } catch(err){alert('Could not load data file: '+err.message);}
+  };
+  reader.readAsText(file);
+}
+
+render();
+setTimeout(initSortableTable, 0);
+</script>
+</body>
+</html>
