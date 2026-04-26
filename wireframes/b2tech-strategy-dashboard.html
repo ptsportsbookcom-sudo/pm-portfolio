@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B2Tech — Risk & Fraud Strategy FY2026</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0d1117;
+    --card: #161b27;
+    --card-hover: #1e2736;
+    --border: #253047;
+    --teal: #00c9a7;
+    --teal-dim: rgba(0,201,167,0.12);
+    --amber: #f59e0b;
+    --amber-dim: rgba(245,158,11,0.12);
+    --red: #ef4444;
+    --red-dim: rgba(239,68,68,0.12);
+    --green: #22c55e;
+    --green-dim: rgba(34,197,94,0.12);
+    --blue: #3b82f6;
+    --purple: #a855f7;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --subtle: #94a3b8;
+  }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #0d1117 0%, #111827 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header-left { display: flex; align-items: center; gap: 16px; }
+  .logo {
+    width: 40px; height: 40px;
+    background: var(--teal);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 16px; color: #0d1117; letter-spacing: -1px;
+  }
+  .header-title { }
+  .header-title h1 { font-size: 18px; font-weight: 700; color: var(--text); }
+  .header-title p { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .header-right { display: flex; align-items: center; gap: 12px; }
+  .badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .badge-conf { background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
+  .badge-internal { background: var(--teal-dim); color: var(--teal); border: 1px solid rgba(0,201,167,0.3); }
+  .updated { font-size: 11px; color: var(--muted); }
+
+  /* MAIN */
+  .main { padding: 24px 32px; max-width: 1440px; margin: 0 auto; }
+
+  /* SECTION LABELS */
+  .section-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    color: var(--muted); text-transform: uppercase; margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-label::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+  }
+
+  /* NSM ROW */
+  .nsm-row {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px;
+  }
+  .nsm-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .nsm-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  }
+  .nsm-card.teal::before { background: var(--teal); }
+  .nsm-card.amber::before { background: var(--amber); }
+  .nsm-card.purple::before { background: var(--purple); }
+  .nsm-card:hover { border-color: var(--teal); background: var(--card-hover); }
+  .nsm-label { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 12px; }
+  .nsm-value { font-size: 42px; font-weight: 800; line-height: 1; margin-bottom: 6px; }
+  .nsm-card.teal .nsm-value { color: var(--teal); }
+  .nsm-card.amber .nsm-value { color: var(--amber); }
+  .nsm-card.purple .nsm-value { color: var(--purple); }
+  .nsm-sub { font-size: 12px; color: var(--subtle); margin-bottom: 16px; }
+  .nsm-target {
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(255,255,255,0.04); border-radius: 6px; padding: 8px 12px;
+  }
+  .nsm-target-label { font-size: 11px; color: var(--muted); }
+  .nsm-target-value { font-size: 11px; font-weight: 700; }
+  .nsm-card.teal .nsm-target-value { color: var(--teal); }
+  .nsm-card.amber .nsm-target-value { color: var(--amber); }
+  .nsm-card.purple .nsm-target-value { color: var(--purple); }
+  .trend { font-size: 18px; position: absolute; top: 24px; right: 24px; opacity: 0.6; }
+
+  /* KPI CARDS */
+  .kpi-row {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px;
+  }
+  .kpi-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+    padding: 16px; display: flex; align-items: flex-start; gap: 12px;
+  }
+  .kpi-icon { font-size: 22px; line-height: 1; }
+  .kpi-content { flex: 1; }
+  .kpi-value { font-size: 20px; font-weight: 700; color: var(--text); }
+  .kpi-name { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .kpi-quarter { font-size: 10px; color: var(--teal); font-weight: 600; margin-top: 6px; }
+
+  /* TWO-COL */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+  .col-wide { grid-column: span 1; }
+
+  /* CARDS */
+  .panel {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 20px; height: 100%;
+  }
+  .panel-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .panel-sub { font-size: 11px; color: var(--muted); margin-bottom: 16px; }
+
+  /* HEATMAP */
+  .heatmap { width: 100%; border-collapse: collapse; font-size: 11px; }
+  .heatmap th {
+    font-size: 10px; font-weight: 600; color: var(--muted); text-transform: uppercase;
+    letter-spacing: 0.5px; padding: 6px 8px; text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .heatmap th:first-child { text-align: left; }
+  .heatmap td { padding: 8px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .heatmap td:first-child { text-align: left; font-weight: 600; color: var(--subtle); font-size: 12px; padding-left: 0; }
+  .heatmap tr.b2tech td { background: rgba(0,201,167,0.05); }
+  .heatmap tr.b2tech td:first-child { color: var(--teal); }
+  .pill {
+    display: inline-block; padding: 3px 8px; border-radius: 4px;
+    font-size: 10px; font-weight: 600; white-space: nowrap;
+  }
+  .pill-mature { background: var(--green-dim); color: var(--green); }
+  .pill-established { background: var(--amber-dim); color: var(--amber); }
+  .pill-early { background: var(--red-dim); color: #fca5a5; }
+  .heatmap-legend {
+    display: flex; gap: 16px; margin-top: 12px; padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 10px; color: var(--muted); }
+  .legend-dot { width: 8px; height: 8px; border-radius: 2px; }
+
+  /* OKR PROGRESS */
+  .okr-goal { margin-bottom: 18px; }
+  .okr-goal:last-child { margin-bottom: 0; }
+  .okr-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+  .okr-name { font-size: 12px; font-weight: 700; color: var(--text); }
+  .okr-pct { font-size: 11px; font-weight: 700; }
+  .okr-objective { font-size: 11px; color: var(--muted); margin-bottom: 8px; }
+  .progress-bar { height: 5px; background: rgba(255,255,255,0.08); border-radius: 10px; overflow: hidden; margin-bottom: 10px; }
+  .progress-fill { height: 100%; border-radius: 10px; transition: width 1s ease; }
+  .okr-krs { display: flex; flex-direction: column; gap: 4px; }
+  .okr-kr { font-size: 10px; color: var(--muted); display: flex; align-items: flex-start; gap: 6px; }
+  .okr-kr::before { content: '→'; color: var(--teal); flex-shrink: 0; }
+  .quarter-badge {
+    font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px;
+    background: var(--teal-dim); color: var(--teal);
+  }
+
+  /* STRATEGIC BETS */
+  .bet-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 20px; height: 100%; display: flex; flex-direction: column; gap: 12px;
+  }
+  .bet-number { font-size: 10px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 1px; }
+  .bet-title { font-size: 14px; font-weight: 700; color: var(--text); }
+  .bet-desc { font-size: 11px; color: var(--subtle); flex: 1; }
+  .bet-moat {
+    background: var(--teal-dim); border: 1px solid rgba(0,201,167,0.2);
+    border-radius: 6px; padding: 8px 10px;
+  }
+  .bet-moat-label { font-size: 10px; color: var(--teal); font-weight: 600; margin-bottom: 3px; }
+  .bet-moat-value { font-size: 11px; color: var(--subtle); }
+  .bet-risk {
+    background: var(--amber-dim); border: 1px solid rgba(245,158,11,0.2);
+    border-radius: 6px; padding: 8px 10px;
+  }
+  .bet-risk-label { font-size: 10px; color: var(--amber); font-weight: 600; margin-bottom: 3px; }
+  .bet-risk-value { font-size: 11px; color: var(--subtle); }
+
+  /* WHITESPACE */
+  .gap-table { width: 100%; border-collapse: collapse; }
+  .gap-table th {
+    font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase;
+    letter-spacing: 0.5px; padding: 0 0 10px 0; border-bottom: 1px solid var(--border);
+    text-align: left;
+  }
+  .gap-table th:not(:first-child) { text-align: center; }
+  .gap-table td {
+    padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+    vertical-align: middle;
+  }
+  .gap-table td:not(:first-child) { text-align: center; }
+  .gap-name { font-size: 12px; font-weight: 600; color: var(--text); }
+  .gap-sub { font-size: 10px; color: var(--muted); margin-top: 2px; }
+  .coverage-bar { display: flex; gap: 3px; justify-content: center; }
+  .cov-dot { width: 10px; height: 10px; border-radius: 2px; }
+  .cov-none { background: var(--red-dim); border: 1px solid rgba(239,68,68,0.3); }
+  .cov-weak { background: var(--amber-dim); border: 1px solid rgba(245,158,11,0.3); }
+  .roadmap-tag {
+    font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 4px;
+    white-space: nowrap;
+  }
+  .tag-bet { background: var(--teal-dim); color: var(--teal); border: 1px solid rgba(0,201,167,0.2); }
+  .tag-strength { background: var(--green-dim); color: var(--green); border: 1px solid rgba(34,197,94,0.2); }
+  .tag-q2 { background: rgba(59,130,246,0.12); color: #93c5fd; border: 1px solid rgba(59,130,246,0.2); }
+
+  /* FOOTER */
+  .footer {
+    border-top: 1px solid var(--border); padding: 16px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 8px;
+  }
+  .footer-left { font-size: 11px; color: var(--muted); }
+  .footer-right { font-size: 11px; color: var(--muted); }
+
+  /* DIVIDER */
+  .divider { height: 1px; background: var(--border); margin: 8px 0 24px; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <div class="logo">B2</div>
+    <div class="header-title">
+      <h1>Risk & Fraud Strategy Dashboard</h1>
+      <p>B2Tech · FY2026 · iGaming & Sportsbook · Emerging Markets</p>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="badge badge-conf">Confidential</span>
+    <span class="badge badge-internal">Internal Leadership</span>
+    <span class="updated">Updated April 2026</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- NORTH STAR METRICS -->
+  <div class="section-label">North Star Metrics</div>
+  <div class="nsm-row">
+
+    <div class="nsm-card teal">
+      <div class="nsm-label">Fraud Decisions Automated</div>
+      <div class="trend">↑</div>
+      <div class="nsm-value">12%</div>
+      <div class="nsm-sub">of risk decisions require zero manual review</div>
+      <div class="nsm-target">
+        <span class="nsm-target-label">Target by Q3 2026</span>
+        <span class="nsm-target-value">40%+ automated · queue −40%</span>
+      </div>
+    </div>
+
+    <div class="nsm-card amber">
+      <div class="nsm-label">Platform Fraud Loss Rate</div>
+      <div class="trend">↓</div>
+      <div class="nsm-value">TBD</div>
+      <div class="nsm-sub">GGR lost to fraud across operator base</div>
+      <div class="nsm-target">
+        <span class="nsm-target-label">Targets by Q4 2026</span>
+        <span class="nsm-target-value">−30% bonus abuse · −25% chargebacks</span>
+      </div>
+    </div>
+
+    <div class="nsm-card purple">
+      <div class="nsm-label">Risk Ops Queue Volume</div>
+      <div class="trend">↓</div>
+      <div class="nsm-value">TBD</div>
+      <div class="nsm-sub">active cases in manual review at any time</div>
+      <div class="nsm-target">
+        <span class="nsm-target-label">Target by Q3 2026</span>
+        <span class="nsm-target-value">−40% vs baseline · false positive &lt;15%</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- OKR KPI CARDS -->
+  <div class="section-label">Strategic OKR Targets</div>
+  <div class="kpi-row">
+    <div class="kpi-card">
+      <div class="kpi-icon">🎯</div>
+      <div class="kpi-content">
+        <div class="kpi-value">−30%</div>
+        <div class="kpi-name">Bonus Abuse Rate</div>
+        <div class="kpi-quarter">KR1.1 · Q3 2026</div>
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon">⚡</div>
+      <div class="kpi-content">
+        <div class="kpi-value">&lt;60s</div>
+        <div class="kpi-name">Real-time Alert Speed (90% coverage)</div>
+        <div class="kpi-quarter">KR1.3 · Q3 2026</div>
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon">🌍</div>
+      <div class="kpi-content">
+        <div class="kpi-value">4</div>
+        <div class="kpi-name">New Operator Contracts · Africa</div>
+        <div class="kpi-quarter">KR3.1–3.2 · FY2026</div>
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon">🛡️</div>
+      <div class="kpi-content">
+        <div class="kpi-value">Zero</div>
+        <div class="kpi-name">Self-Exclusion Violations (all channels)</div>
+        <div class="kpi-quarter">KR4.3 · Q4 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- HEATMAP + OKR PROGRESS -->
+  <div class="two-col" style="margin-bottom:24px;">
+
+    <!-- COMPETITIVE HEATMAP -->
+    <div class="panel">
+      <div class="panel-title">Competitive Feature Heatmap</div>
+      <div class="panel-sub">Maturity assessment across 6 capability categories · B2Tech vs 5 direct competitors</div>
+      <table class="heatmap">
+        <thead>
+          <tr>
+            <th style="width:120px;">Competitor</th>
+            <th>Risk & Fraud</th>
+            <th>Reporting</th>
+            <th>AI / Auto</th>
+            <th>Omnichannel</th>
+            <th>Mobile</th>
+            <th>Integrations</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>BtoBet</td>
+            <td><span class="pill pill-established">Established</span></td>
+            <td><span class="pill pill-mature">Mature</span></td>
+            <td><span class="pill pill-early">Early</span></td>
+            <td><span class="pill pill-mature">Mature</span></td>
+            <td><span class="pill pill-established">Established</span></td>
+            <td><span class="pill pill-established">Established</span></td>
+          </tr>
+          <tr>
+            <td>Digitain</td>
+            <td><span class="pill pill-established">Established</span></td>
+            <td><span class="pill pill-mature">Mature</span></td>
+            <td><span class="pill pill-early">Early</span></td>
+            <td><span class="pill pill-established">Established</span></td>
+            <td><span class="pill pill-early">Early</span></td>
+            <td><span class="pill pill-mature">Mature</span></td>
+          </tr>
+          <tr>
+            <td>Altenar</td>
+            <td><span class="pill pill-mature">Mature</span></td>
+            <td><span class="pill pill-mature">Mature</span></td>
+            <td><span class="pill pill-mature">Mature</span></td>
+            <td><span class="pill pill-established">Established</span></td>
+            <td><span class="pill pill-established">Established</span></td>
+            <td><span class="pill pill-mature">Mature</span></td>
+          </tr>
+          <tr>
+            <td>BetConstruct</td>
+            <td><span class="pill pill-established">Established</span></td>
+            <td><span class="pill pill-mature">Mature</span></td>
+            <td><span class="pill pill-established">Established</span></td>
+            <td><span class="pill pill-mature">Mature</span></td>
+            <td><span class="pill pill-established">Established</span></td>
+            <td><span class="pill pill-mature">Mature</span></td>
+          </tr>
+          <tr>
+            <td>Pronet</td>
+            <td><span class="pill pill-established">Established</span></td>
+            <td><span class="pill pill-established">Established</span></td>
+            <td><span class="pill pill-early">Early</span></td>
+            <td><span class="pill pill-established">Established</span></td>
+            <td><span class="pill pill-mature">Mature</span></td>
+            <td><span class="pill pill-established">Established</span></td>
+          </tr>
+          <tr class="b2tech">
+            <td>▶ B2Tech</td>
+            <td><span class="pill pill-established">Established</span></td>
+            <td><span class="pill pill-established">Established</span></td>
+            <td><span class="pill pill-early">Early →</span></td>
+            <td><span class="pill pill-mature">Mature</span></td>
+            <td><span class="pill pill-established">Established</span></td>
+            <td><span class="pill pill-established">Established</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="heatmap-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:#22c55e;"></div>Mature</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#f59e0b;"></div>Established</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#ef4444;"></div>Early</div>
+        <div class="legend-item" style="margin-left:auto;font-size:10px;color:var(--teal);">▶ = B2Tech (highlighted)</div>
+      </div>
+    </div>
+
+    <!-- OKR PROGRESS -->
+    <div class="panel">
+      <div class="panel-title">OKR Progress — FY2026</div>
+      <div class="panel-sub">Placeholder baselines · update with actuals each quarter</div>
+
+      <div class="okr-goal">
+        <div class="okr-header">
+          <span class="okr-name">Goal 1 — Reduce Platform Fraud Loss</span>
+          <span style="display:flex;gap:8px;align-items:center;"><span class="quarter-badge">Q3–Q4</span><span class="okr-pct" style="color:var(--teal);">15%</span></span>
+        </div>
+        <div class="okr-objective">Make B2Tech the most fraud-resistant B2B platform in target markets</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:15%;background:var(--teal);"></div></div>
+        <div class="okr-krs">
+          <div class="okr-kr">Reduce bonus abuse rate by 30% across operator base — Q3 2026</div>
+          <div class="okr-kr">Reduce payment fraud chargebacks by 25% — Q4 2026</div>
+          <div class="okr-kr">Real-time fraud alerting &lt;60s for 90% of rules — Q3 2026</div>
+        </div>
+      </div>
+
+      <div class="okr-goal">
+        <div class="okr-header">
+          <span class="okr-name">Goal 2 — Automate Risk Operations</span>
+          <span style="display:flex;gap:8px;align-items:center;"><span class="quarter-badge">Q2–Q4</span><span class="okr-pct" style="color:var(--amber);">20%</span></span>
+        </div>
+        <div class="okr-objective">Shift routine fraud decisions from manual review to the platform</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:20%;background:var(--amber);"></div></div>
+        <div class="okr-krs">
+          <div class="okr-kr">−40% manual review queue via automated decisioning — Q3 2026</div>
+          <div class="okr-kr">False positive rate below 15% for auto-blocks — Q4 2026</div>
+          <div class="okr-kr">Auto-block for high-confidence signals (score &gt;85) for all operators — Q2 2026</div>
+        </div>
+      </div>
+
+      <div class="okr-goal">
+        <div class="okr-header">
+          <span class="okr-name">Goal 3 — Expand African Market Footprint</span>
+          <span style="display:flex;gap:8px;align-items:center;"><span class="quarter-badge">Q3–Q4</span><span class="okr-pct" style="color:var(--purple);">25%</span></span>
+        </div>
+        <div class="okr-objective">Sign 4 new operator contracts in underserved African markets by end FY2026</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:25%;background:var(--purple);"></div></div>
+        <div class="okr-krs">
+          <div class="okr-kr">Launch in 2 new markets — Ethiopia, Ivory Coast — Q3 2026</div>
+          <div class="okr-kr">Sign 2 tier-1 operators in Nigeria, Kenya, South Africa — Q4 2026</div>
+          <div class="okr-kr">85% retail/digital feature parity for all new deployments — Q2 2026</div>
+        </div>
+      </div>
+
+      <div class="okr-goal">
+        <div class="okr-header">
+          <span class="okr-name">Goal 4 — Progressive KYC for African Operators</span>
+          <span style="display:flex;gap:8px;align-items:center;"><span class="quarter-badge">Q2–Q4</span><span class="okr-pct" style="color:var(--blue);">10%</span></span>
+        </div>
+        <div class="okr-objective">Replace rigid upfront KYC with risk-based progressive verification</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:10%;background:var(--blue);"></div></div>
+        <div class="okr-krs">
+          <div class="okr-kr">−30% onboarding abandonment at verification step — Q3 2026</div>
+          <div class="okr-kr">Integrate 2 African-native identity providers (SIM metadata, mobile money) — Q2 2026</div>
+          <div class="okr-kr">Zero self-exclusion enforcement violations across all channels — Q4 2026</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- STRATEGIC BETS + WHITESPACE -->
+  <div class="section-label">Strategic Bets & Market Whitespace</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px;margin-bottom:24px;">
+
+    <!-- BET 1 -->
+    <div class="bet-card">
+      <div class="bet-number">Bet 01</div>
+      <div class="bet-title">Hybrid Risk Scoring</div>
+      <div class="bet-desc">Moving from static rule-only detection to a layered scoring system combining configurable rules with behavioral and device signals. The central Risk product investment for FY2026.</div>
+      <div class="bet-moat">
+        <div class="bet-moat-label">Competitive Moat Against</div>
+        <div class="bet-moat-value">BtoBet · Digitain — both weakest on AI/Automation</div>
+      </div>
+      <div class="bet-risk">
+        <div class="bet-risk-label">⚠ Key Risk</div>
+        <div class="bet-risk-value">ML quality requires labelled data — sparse in early African deployments. Mitigate: rules-weighted launch, ML weight increases as data matures.</div>
+      </div>
+    </div>
+
+    <!-- BET 2 -->
+    <div class="bet-card">
+      <div class="bet-number">Bet 02</div>
+      <div class="bet-title">Africa-Native Identity</div>
+      <div class="bet-desc">Direct integrations with African mobile money providers and local identity brokers as KYC signal layer. SIM metadata + mobile money account status — low-friction, locally trusted.</div>
+      <div class="bet-moat">
+        <div class="bet-moat-label">Competitive Moat Against</div>
+        <div class="bet-moat-value">All 5 competitors — Pronet leads but coverage remains limited</div>
+      </div>
+      <div class="bet-risk">
+        <div class="bet-risk-label">⚠ Key Risk</div>
+        <div class="bet-risk-value">Regulatory acceptance varies by country. Mitigate: position as supplementary signal, not standalone; document per-market acceptance before launch.</div>
+      </div>
+    </div>
+
+    <!-- BET 3 -->
+    <div class="bet-card">
+      <div class="bet-number">Bet 03</div>
+      <div class="bet-title">Omnichannel Risk Enforcement</div>
+      <div class="bet-desc">All risk decisions — fraud flags, self-exclusion, withdrawal holds — must propagate instantly across digital, USSD, and retail POS. Non-negotiable for African operators.</div>
+      <div class="bet-moat">
+        <div class="bet-moat-label">Competitive Moat Against</div>
+        <div class="bet-moat-value">Digitain · Pronet — retail integration still maturing for both</div>
+      </div>
+      <div class="bet-risk">
+        <div class="bet-risk-label">⚠ Key Risk</div>
+        <div class="bet-risk-value">Retail POS integration depth varies across operator base. Mitigate: channel audit before go-live; compliance checklist + integration support provided.</div>
+      </div>
+    </div>
+
+    <!-- WHITESPACE MAP -->
+    <div class="panel">
+      <div class="panel-title">Market Whitespace</div>
+      <div class="panel-sub">Capability gaps across all 5 competitors — B2Tech opportunity space</div>
+      <table class="gap-table">
+        <thead>
+          <tr>
+            <th>Gap</th>
+            <th>Coverage</th>
+            <th>B2Tech</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="gap-name">Behavioral Scoring</div>
+              <div class="gap-sub">Production-grade ML fraud models</div>
+            </td>
+            <td>
+              <div style="font-size:10px;color:var(--red);font-weight:700;">0 / 5</div>
+            </td>
+            <td><span class="roadmap-tag tag-bet">Bet 01</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="gap-name">Auto Decisioning</div>
+              <div class="gap-sub">Live in production (not just roadmap)</div>
+            </td>
+            <td>
+              <div style="font-size:10px;color:var(--red);font-weight:700;">0 / 5</div>
+            </td>
+            <td><span class="roadmap-tag tag-q2">Q2 2026</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="gap-name">USSD / Low-data UX</div>
+              <div class="gap-sub">Only BetConstruct has this</div>
+            </td>
+            <td>
+              <div style="font-size:10px;color:var(--amber);font-weight:700;">1 / 5</div>
+            </td>
+            <td><span class="roadmap-tag tag-strength">Core Strength</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="gap-name">African KYC / ID Brokers</div>
+              <div class="gap-sub">Pronet leads but limited coverage</div>
+            </td>
+            <td>
+              <div style="font-size:10px;color:var(--amber);font-weight:700;">1 / 5</div>
+            </td>
+            <td><span class="roadmap-tag tag-bet">Bet 02</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-left">🔒 Confidential — Internal Leadership Use Only · B2Tech Risk & Fraud · FY2026</div>
+  <div class="footer-right">Sources: Competitor Feature Matrix · B2Tech Strategy & OKRs FY2026 · April 2026</div>
+</div>
+
+</body>
+</html>
