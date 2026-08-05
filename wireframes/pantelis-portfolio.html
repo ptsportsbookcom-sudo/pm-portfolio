@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pantelis Theocharides — Senior Product Manager | Risk, Fraud & Player Behaviour</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#faf7f2;
+    --bg-alt:#f2ede3;
+    --card:#fffdf9;
+    --border:#e8e1d3;
+    --text:#292520;
+    --muted:#6b6459;
+    --muted2:#948c7d;
+    --accent:#0f766e;
+    --accent2:#b45309;
+    --danger:#dc2626;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px;}
+
+  /* NAV */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(250,247,242,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  nav.wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:12px;}
+  .brand{font-weight:700;font-size:15px;letter-spacing:-0.02em;}
+  .brand span{color:var(--accent);}
+  .navlinks{display:flex;gap:28px;font-size:13px;color:var(--muted);}
+  .navlinks a:hover,.navlinks a:focus{color:var(--text);}
+  .navlinks{display:none;}
+  @media(min-width:720px){.navlinks{display:flex;}}
+
+  /* MOBILE NAV */
+  .mobile-nav-btn{
+    display:none;
+    align-items:center;justify-content:center;
+    background:transparent;border:1px solid var(--border);
+    border-radius:6px;padding:6px 8px;cursor:pointer;
+    color:var(--text);
+  }
+  .mobile-nav-btn:hover,.mobile-nav-btn:focus{border-color:var(--muted2);}
+  .mobile-nav-btn svg{display:block;width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;}
+  @media(max-width:719px){.mobile-nav-btn{display:inline-flex;}}
+  .mobile-nav-menu{
+    position:absolute;top:64px;left:0;right:0;
+    background:var(--bg);border-bottom:1px solid var(--border);
+    padding:8px 24px 12px;
+  }
+  .mobile-nav-menu[hidden]{display:none;}
+  .mobile-nav-menu a{
+    display:block;padding:12px 4px;
+    font-size:15px;color:var(--text);
+    border-bottom:1px solid var(--border);
+  }
+  .mobile-nav-menu a:last-child{border-bottom:none;}
+  .mobile-nav-menu a:hover,.mobile-nav-menu a:focus{color:var(--accent);}
+  @media(min-width:720px){.mobile-nav-menu{display:none !important;}}
+
+  /* HERO */
+  .hero{padding:96px 0 64px;border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+  .hero > .wrap{position:relative;z-index:2;}
+  .matrix-bg{
+    position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;
+    opacity:0.28;pointer-events:none;
+  }
+  .hero-top{display:flex;align-items:center;gap:16px;margin-bottom:28px;}
+  .avatar{
+    width:64px;height:64px;border-radius:50%;object-fit:cover;
+    border:1px solid var(--border);flex-shrink:0;
+  }
+  .badge{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:12px;color:var(--muted);
+    border:1px solid var(--border);border-radius:999px;
+    padding:6px 14px;background:rgba(250,247,242,0.75);
+  }
+  .badge .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);}
+  h1{
+    font-size:44px;font-weight:800;letter-spacing:-0.03em;line-height:1.08;
+    max-width:780px;
+  }
+  @media(min-width:720px){h1{font-size:60px;}}
+  h1 em{font-style:normal;color:var(--accent);}
+  .hero-sub{
+    margin-top:22px;max-width:640px;color:var(--muted);font-size:17px;line-height:1.6;
+  }
+  .hero-tagline{
+    margin-top:14px;max-width:640px;color:var(--text);font-size:15px;line-height:1.55;
+    padding:12px 16px;background:rgba(250,247,242,0.7);border-left:2px solid var(--accent);border-radius:6px;
+  }
+  .hero-cta{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 20px;border-radius:8px;font-size:14px;font-weight:600;
+    border:1px solid var(--border);
+  }
+  .btn-primary{background:var(--accent);color:#ffffff;border-color:var(--accent);}
+  .btn-ghost{color:var(--text);}
+  .btn-ghost:hover{border-color:var(--muted2);}
+
+  /* HERO STRIP (replaces metrics) */
+  .hero-strip{
+    margin-top:56px;padding:22px 26px;
+    background:rgba(250,247,242,0.6);
+    border:1px solid var(--border);border-radius:12px;
+    display:flex;flex-direction:column;gap:12px;
+  }
+  .hero-strip-row{
+    display:grid;grid-template-columns:1fr;gap:4px;align-items:baseline;
+  }
+  @media(min-width:720px){.hero-strip-row{grid-template-columns:140px 1fr;gap:20px;}}
+  .hero-strip-label{
+    font-size:10.5px;text-transform:uppercase;letter-spacing:0.1em;
+    color:var(--muted2);font-weight:700;
+  }
+  .hero-strip-list{
+    font-size:14.5px;color:var(--text);font-weight:500;line-height:1.55;
+  }
+
+  /* SECTION */
+  section{padding:80px 0;border-bottom:1px solid var(--border);}
+  .eyebrow{
+    font-size:12px;text-transform:uppercase;letter-spacing:0.12em;
+    color:var(--accent2);font-weight:600;margin-bottom:14px;
+  }
+  h2{font-size:30px;font-weight:800;letter-spacing:-0.02em;max-width:600px;}
+  .section-intro{color:var(--muted);margin-top:14px;max-width:620px;font-size:15.5px;}
+
+  /* ABOUT */
+  .about-grid{display:grid;gap:40px;margin-top:40px;}
+  @media(min-width:820px){.about-grid{grid-template-columns:1.2fr 1fr;}}
+  .about-text p{color:var(--muted);margin-bottom:16px;font-size:15.5px;line-height:1.75;}
+  .about-text strong{color:var(--text);}
+  .pillars{display:flex;flex-direction:column;gap:14px;}
+  .pillar{
+    border:1px solid var(--border);border-radius:10px;padding:16px 18px;background:var(--card);
+  }
+  .pillar .yrs{font-size:12px;color:var(--accent);font-weight:700;}
+  .pillar .role{font-weight:600;margin-top:4px;font-size:14.5px;}
+  .pillar .desc{color:var(--muted);font-size:13px;margin-top:4px;}
+
+  /* CASE STUDIES */
+  .cases{display:flex;flex-direction:column;gap:40px;margin-top:44px;}
+  .case{
+    border:0.5px solid var(--border);border-radius:14px;background:var(--card);
+    padding:28px;
+    transition:border-color 200ms cubic-bezier(0.4,0,0.2,1),transform 200ms cubic-bezier(0.4,0,0.2,1);
+  }
+  .case:hover{border-color:var(--muted2);}
+  .case-featured{border-color:var(--accent);border-width:1px;}
+  .case-featured:hover{border-color:var(--accent);}
+  .case-top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap;}
+  .case-title{font-size:20px;font-weight:700;letter-spacing:-0.01em;}
+  .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+  .tag{
+    font-size:11px;color:var(--muted);border:1px solid var(--border);
+    padding:4px 10px;border-radius:999px;
+  }
+  .tag-featured{color:var(--accent2);border-color:var(--accent2);font-weight:700;background:rgba(180,83,9,0.06);}
+  .scope-strip{
+    display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;
+    padding:10px 12px;background:var(--bg-alt);border-radius:8px;
+    font-size:12px;color:var(--muted);align-items:center;
+  }
+  .scope-strip .lbl{font-weight:700;color:var(--muted2);text-transform:uppercase;letter-spacing:0.06em;font-size:10.5px;margin-right:2px;}
+  .scope-strip .chip-s{
+    background:var(--card);border:1px solid var(--border);border-radius:6px;
+    padding:3px 9px;color:var(--text);font-weight:500;
+  }
+  .owned-strip{
+    margin-top:12px;padding:10px 14px;
+    background:rgba(15,118,110,0.06);border-left:2px solid var(--accent);border-radius:6px;
+    font-size:13.5px;color:var(--text);line-height:1.55;
+  }
+  .owned-strip strong{color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;font-size:11px;display:block;margin-bottom:3px;}
+  .case-cols{display:grid;gap:18px;margin-top:20px;}
+  @media(min-width:720px){.case-cols{grid-template-columns:1fr 1fr 1fr;}}
+  .case-col .lbl{font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted2);font-weight:700;margin-bottom:6px;}
+  .case-col p{font-size:14px;color:var(--muted);line-height:1.6;}
+  .case-col.outcome{border-left:2px solid var(--accent);padding-left:16px;}
+
+  /* PILLAR / CASE ICONS */
+  .icon{
+    width:32px;height:32px;border-radius:8px;
+    background:var(--bg-alt);display:inline-flex;align-items:center;justify-content:center;
+    color:var(--accent);flex-shrink:0;margin-bottom:8px;
+  }
+  .icon svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .case-icon{
+    width:40px;height:40px;border-radius:10px;background:var(--bg-alt);
+    display:inline-flex;align-items:center;justify-content:center;
+    color:var(--accent);flex-shrink:0;
+  }
+  .case-icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .case-head{display:flex;gap:14px;align-items:flex-start;}
+
+  /* SHOTS — new treatment */
+  .shot{margin-top:18px;}
+  .shot-primary img{
+    width:100%;max-width:100%;height:auto;display:block;
+    border-radius:10px;border:1px solid var(--border);
+    background:var(--bg-alt);
+  }
+  .shot-primary--natural img{max-width:640px;margin:0 auto;}
+  .shot-two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;}
+  @media(max-width:640px){.shot-two{grid-template-columns:1fr;}}
+  .shot-two img{
+    width:100%;height:auto;display:block;
+    border-radius:10px;border:1px solid var(--border);
+    background:var(--bg-alt);
+  }
+  .shot-caption{
+    font-size:12.5px;color:var(--muted2);margin-top:8px;font-style:italic;line-height:1.5;
+  }
+  .shot-caption strong{color:var(--muted);font-style:normal;font-weight:600;}
+
+  /* BROWSER FRAME — makes screenshots feel like products */
+  .browser-frame{
+    background:var(--card);
+    border:0.5px solid var(--border);border-radius:10px;
+    overflow:hidden;
+  }
+  .browser-frame-bar{
+    display:flex;align-items:center;gap:6px;
+    padding:8px 12px;
+    border-bottom:0.5px solid var(--border);
+    background:var(--bg-alt);
+  }
+  .browser-frame-bar span{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--border);
+  }
+  .browser-frame-bar span:nth-child(1){background:#e8a5a5;}
+  .browser-frame-bar span:nth-child(2){background:#e8d69f;}
+  .browser-frame-bar span:nth-child(3){background:#a8d5b0;}
+  .browser-frame-bar .bf-title{
+    margin-left:12px;font-size:11px;color:var(--muted2);
+    font-family:'JetBrains Mono',monospace;
+  }
+  .browser-frame img{
+    display:block;width:100%;height:auto;border:none;border-radius:0;
+  }
+  .browser-frame--natural{max-width:680px;margin:0 auto;}
+
+  /* PRODUCT HEADER — above shot, reframes as product */
+  .product-header{
+    display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;
+    margin-bottom:10px;
+  }
+  .product-header .ph-name{
+    font-size:14px;font-weight:700;color:var(--text);letter-spacing:-0.005em;
+  }
+  .product-header .ph-tag{
+    font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;
+    padding:2px 8px;background:var(--bg-alt);border-radius:999px;
+  }
+
+  /* LEAP FEATURE STRIP — replaces bare thumbnail-row */
+  .leap-features{
+    display:grid;grid-template-columns:1fr;gap:14px;margin-top:14px;
+  }
+  @media(min-width:720px){.leap-features{grid-template-columns:1fr 1fr;}}
+  .leap-feature{
+    display:flex;flex-direction:column;gap:8px;
+  }
+  .leap-feature .lf-caption{
+    font-size:12px;color:var(--muted);line-height:1.55;padding:0 2px;
+  }
+  .leap-feature .lf-caption strong{color:var(--text);font-weight:600;}
+
+  /* CHAPTER TAGS (PVP) */
+  .chapter-tag{
+    display:flex;align-items:center;gap:10px;margin:26px 0 12px;
+  }
+  .chapter-tag .ct-num{
+    font-family:'JetBrains Mono',monospace;color:var(--accent);
+    font-size:11px;font-weight:700;
+  }
+  .chapter-tag .ct-title{
+    font-size:12px;color:var(--muted2);text-transform:uppercase;letter-spacing:0.1em;
+    font-weight:700;
+  }
+  .chapter-tag .ct-line{
+    flex:1;height:0.5px;background:var(--border);
+  }
+
+  /* STORY BLOCK — capability + why + demonstrates + memorable close */
+  .story-why{
+    font-size:13.5px;color:var(--muted);line-height:1.55;
+    margin:2px 0 12px;font-style:italic;
+    max-width:640px;
+  }
+  .story-caps{
+    display:grid;grid-template-columns:1fr;gap:8px;
+    margin-top:14px;padding:14px 18px;
+    background:var(--bg-alt);border-radius:8px;
+    list-style:none;
+  }
+  @media(min-width:640px){.story-caps{grid-template-columns:1fr 1fr;}}
+  .story-cap{
+    font-size:12.5px;color:var(--text);
+    display:flex;gap:8px;align-items:baseline;line-height:1.4;
+  }
+  .story-cap::before{
+    content:"✓";color:var(--accent);font-weight:700;flex-shrink:0;font-size:11px;
+  }
+  .memorable-close{
+    margin-top:32px;padding-top:24px;
+    border-top:0.5px solid var(--border);
+    font-family:'JetBrains Mono',monospace;font-size:13px;
+    color:var(--text);line-height:1.65;
+    font-style:italic;letter-spacing:-0.01em;
+    max-width:720px;
+  }
+  .memorable-close::before{
+    content:"—";color:var(--accent);margin-right:8px;font-style:normal;
+  }
+
+  /* ANNOTATION OVERLAY (Promotions) */
+  .annotated{position:relative;display:inline-block;width:100%;}
+  .annotated .callout{
+    position:absolute;
+    display:inline-flex;align-items:center;gap:6px;
+    padding:4px 10px;
+    background:var(--accent);color:#ffffff;
+    font-size:11px;font-weight:600;
+    border-radius:999px;
+    box-shadow:0 2px 8px rgba(15,118,110,0.25);
+    white-space:nowrap;
+  }
+  .annotated .callout::before{
+    content:"";width:6px;height:6px;border-radius:50%;background:#ffffff;
+  }
+
+  /* PROMO — screenshot beside formula */
+  .promo-visual{
+    display:grid;grid-template-columns:1fr;gap:14px;margin-top:18px;align-items:start;
+  }
+  @media(min-width:820px){.promo-visual{grid-template-columns:1.4fr 1fr;}}
+  .promo-visual .shot-primary img{background:#ffffff;}
+  .formula-callout{
+    background:#1c1e25;border:1px solid #2a2d35;border-radius:10px;
+    padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:12.5px;
+    color:#c9cdd6;line-height:1.75;
+  }
+  .formula-callout .fc-title{
+    color:#8a8f9c;font-size:10.5px;text-transform:uppercase;letter-spacing:0.08em;
+    font-weight:600;margin-bottom:10px;font-family:'Inter',sans-serif;
+  }
+  .formula-callout .k{color:#5eead4;font-weight:600;}
+  .formula-callout .v{color:#f59e0b;}
+  .formula-callout .c{color:#6b7280;font-family:'Inter',sans-serif;font-size:11px;font-style:italic;}
+  .formula-callout div + div{margin-top:12px;padding-top:12px;border-top:1px solid #2a2d35;}
+
+  /* ABUSE PATTERNS */
+  .abuse-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:20px;}
+  @media(min-width:720px){.abuse-grid{grid-template-columns:repeat(3,1fr);}}
+  .abuse-card{border:1px solid var(--border);border-radius:8px;padding:14px 16px;background:var(--bg-alt);}
+  .abuse-card .ac-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px;}
+  .abuse-card .ac-body{font-size:12.5px;color:var(--muted);line-height:1.55;}
+  .abuse-card .ac-body strong{color:var(--text);font-weight:600;}
+  .abuse-header{font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted2);font-weight:700;margin-top:24px;}
+
+  /* WALLET FLOW DIAGRAM */
+  .wallet-flow{margin-top:14px;padding:16px 12px;background:var(--bg-alt);border-radius:10px;overflow-x:auto;}
+  .wallet-flow svg{display:block;margin:0 auto;max-width:100%;height:auto;}
+
+  /* CRM DIAGRAM */
+  .crm-diagram{margin-top:18px;padding:20px 12px;background:var(--bg-alt);border-radius:10px;overflow-x:auto;}
+  .crm-diagram svg{display:block;margin:0 auto;max-width:100%;height:auto;}
+
+  /* PVP BUILT strip */
+  .built-strip{
+    margin-top:20px;padding:14px 18px;background:var(--bg-alt);border-radius:10px;
+    display:flex;flex-wrap:wrap;gap:8px 14px;align-items:baseline;
+  }
+  .built-strip .bs-title{
+    font-size:11px;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:0.08em;
+    margin-right:6px;
+  }
+  .built-strip .bs-item{
+    font-size:13px;color:var(--text);
+  }
+  .built-strip .bs-sep{color:var(--muted2);}
+
+  /* CURRENT FOCUS CARD (Risk) */
+  .focus-card{
+    border:1px solid var(--border);border-left:2px solid var(--accent2);
+    border-radius:14px;background:var(--card);padding:28px;
+  }
+  .focus-label{
+    display:inline-flex;align-items:center;gap:8px;font-size:11px;
+    color:var(--accent2);text-transform:uppercase;letter-spacing:0.08em;font-weight:700;
+    margin-bottom:12px;
+  }
+  .focus-card p{color:var(--muted);font-size:14.5px;line-height:1.7;margin-top:12px;}
+  .focus-card p:first-of-type{margin-top:0;}
+
+  /* PRINCIPLES */
+  .principles{display:grid;gap:16px;margin-top:44px;}
+  @media(min-width:720px){.principles{grid-template-columns:repeat(3,1fr);}}
+  .principle{border:1px solid var(--border);border-radius:12px;padding:22px;background:var(--card);}
+  .principle .idx{font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:13px;}
+  .principle h3{font-size:16px;margin-top:8px;font-weight:700;}
+  .principle p{color:var(--muted);font-size:13.5px;margin-top:8px;line-height:1.6;}
+  .principle .ex{
+    margin-top:12px;padding-top:12px;border-top:1px dashed var(--border);
+    font-size:12.5px;color:var(--muted);line-height:1.6;
+  }
+  .principle .ex strong{color:var(--text);font-weight:600;}
+
+  /* SKILLS */
+  .skillrow{margin-top:32px;display:flex;flex-wrap:wrap;gap:10px;}
+  .chip{font-size:13px;background:var(--card);border:1px solid var(--border);padding:8px 14px;border-radius:8px;color:var(--text);}
+
+  /* TIMELINE */
+  .timeline{margin-top:44px;display:flex;flex-direction:column;}
+  .tl-item{
+    display:grid;grid-template-columns:120px 1fr;gap:20px;
+    padding:20px 0;border-top:1px solid var(--border);
+  }
+  .tl-item:last-child{border-bottom:1px solid var(--border);}
+  .tl-when{color:var(--muted2);font-size:12.5px;padding-top:2px;}
+  .tl-role{font-weight:700;font-size:15px;}
+  .tl-company{color:var(--accent);font-size:13.5px;margin-top:2px;}
+  .tl-desc{color:var(--muted);font-size:13.5px;margin-top:6px;line-height:1.6;}
+
+  /* CONTACT */
+  .contact{border-bottom:none;text-align:center;padding:96px 0;}
+  .contact h2{margin:0 auto;max-width:none;}
+  .contact-links{display:flex;gap:14px;justify-content:center;margin-top:32px;flex-wrap:wrap;}
+  footer{padding:28px 0;text-align:center;color:var(--muted2);font-size:12.5px;}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="brand">Pantelis<span>.</span></div>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#pvp">PVP Slot Arena</a>
+      <a href="#approach">Approach</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="btn btn-ghost" style="padding:8px 16px;font-size:13px;">Get in touch</a>
+    <button type="button" class="mobile-nav-btn" id="mobileNavBtn" aria-expanded="false" aria-controls="mobileNavMenu" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </nav>
+  <div class="mobile-nav-menu" id="mobileNavMenu" hidden>
+    <a href="#about">About</a>
+    <a href="#work">Work</a>
+    <a href="#pvp">PVP Slot Arena</a>
+    <a href="#approach">Approach</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <canvas class="matrix-bg" id="matrixBg" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="hero-top">
+      <img src="assets/headshot.jpg" alt="Pantelis Theocharides" class="avatar">
+      <div class="badge"><span class="dot"></span> Senior Product Manager — Risk, Fraud &amp; Player Behaviour  ·  Nicosia, Cyprus</div>
+    </div>
+    <h1>From the <em>trading desk</em> to the <em>product roadmap</em>.</h1>
+    <p class="hero-sub">
+      Two decades reading players, operators, and the platforms between them. I ship product across the
+      iGaming ecosystem — with behavioural risk as the specialty I keep coming back to.
+    </p>
+    <div class="hero-cta">
+      <a href="#work" class="btn btn-primary">See the work →</a>
+      <a href="assets/pantelis-theocharides-cv.docx" download class="btn btn-ghost">Download CV</a>
+    </div>
+
+    <div class="hero-strip">
+      <div class="hero-strip-row">
+        <span class="hero-strip-label">Journey</span>
+        <span class="hero-strip-list">Trader → Analyst → Product → Behavioural Risk</span>
+      </div>
+      <div class="hero-strip-row">
+        <span class="hero-strip-label">Product across</span>
+        <span class="hero-strip-list">Player experience · Commercial systems · Operator tooling · Behavioural risk</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="eyebrow">About</div>
+    <h2>A trading floor is where I learned to read risk.</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I started as a <strong>European sports trader</strong> at Sportingbet, then OffsideBet — compiling odds
+          and trading in-running across football, basketball, tennis, and more. Spotted arbitrage and bonus abuse
+          from the operational side before those terms ever showed up in a risk framework. Moved into sportsbook
+          management at Betologic Cyprus, then spent four years as a <strong>Data &amp; Trading Analyst</strong>
+          at Playtech turning betting patterns into KPIs and risk reporting instead of gut calls. That grounding
+          carried into <strong>product management</strong> across B2B iGaming platforms — Playtech Sports, Leap
+          Gaming, and NuxGame — shipping player-facing product, operator tooling, and platform capabilities
+          across those B2B platforms.
+        </p>
+        <p>
+          Along the way I've shipped player-facing product (casino, sportsbook, virtual sports, retail cashier
+          flows), commercial engines (promotions, loyalty, gamification), and the operator tooling that runs all
+          of it (CRM, segmentation, back office). When I talk about bonus abuse, I know the mechanics because
+          I've built them.
+        </p>
+        <p>
+          Today at <strong>B2Tech</strong> I'm the product owner for risk systems targeting emerging markets —
+          USSD flows, retail agent networks, mobile money, fragmented identity infrastructure. Risk is the
+          specialty; product across the platform is the profession. The frame behind every case below: the best
+          iGaming products balance player experience, commercial performance, operator efficiency, and the risk
+          that follows all three.
+        </p>
+      </div>
+      <div class="pillars">
+        <div class="pillar">
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-4 4 4 5-6"/></svg></div>
+          <div class="yrs">TRADING</div>
+          <div class="role">Sportingbet · OffsideBet · Betologic Cyprus</div>
+          <div class="desc">Odds compilation, in-running trading, arbitrage &amp; bonus abuse at the coalface.</div>
+        </div>
+        <div class="pillar">
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 10h10M7 14h6"/></svg></div>
+          <div class="yrs">DATA &amp; ANALYSIS</div>
+          <div class="role">Data &amp; Trading Analyst, Playtech</div>
+          <div class="desc">KPIs, data warehouses, betting pattern analysis, risk reporting.</div>
+        </div>
+        <div class="pillar">
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5M3 17l9 5 9-5"/></svg></div>
+          <div class="yrs">PRODUCT</div>
+          <div class="role">Playtech Sports · Leap Gaming · NuxGame</div>
+          <div class="desc">B2B platform PM — promotions, loyalty, CRM, roadmap ownership.</div>
+        </div>
+        <div class="pillar">
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v6c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V7l8-4z"/></svg></div>
+          <div class="yrs">RISK SYSTEMS</div>
+          <div class="role">B2Tech</div>
+          <div class="desc">Risk &amp; fraud product for emerging-market omnichannel operators.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="eyebrow">Selected Work</div>
+    <h2>Organized by domain, not by employer.</h2>
+    <p class="section-intro">
+      Five cases — starting with current risk focus at B2Tech (with a personal prototype demonstrating the
+      operating model), then promotions, CRM, PVP Slot Arena, and virtual sports.
+    </p>
+
+    <div class="cases">
+
+      <!-- CASE 1: RISK (at B2Tech + prototype) -->
+      <div class="case">
+        <div class="case-top">
+          <div class="case-head">
+            <div class="case-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v6c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V7l8-4z"/></svg></div>
+            <div>
+              <div class="case-title">Risk &amp; fraud product for emerging markets — at B2Tech</div>
+              <div class="tags">
+                <span class="tag">Risk &amp; Fraud</span>
+                <span class="tag">Hybrid Scoring</span>
+                <span class="tag">KYC</span>
+                <span class="tag">Emerging Markets</span>
+                <span class="tag">Operating Model</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="scope-strip">
+          <span class="lbl">Focus:</span>
+          <span class="chip-s">USSD</span>
+          <span class="chip-s">Mobile money</span>
+          <span class="chip-s">Retail agent networks</span>
+          <span class="chip-s">Hybrid rules + scoring</span>
+          <span class="chip-s">Progressive KYC</span>
+        </div>
+        <div class="owned-strip">
+          <strong>Position</strong>
+          Product ownership for risk systems at B2Tech. The prototype below (risk-platform-simulator) is a personal Lovable build that demonstrates the operating model I'm applying — separate from confidential production work.
+        </div>
+
+        <div class="chapter-tag">
+          <span class="ct-num">01</span>
+          <span class="ct-title">Approach at B2Tech</span>
+          <span class="ct-line"></span>
+        </div>
+        <p style="color:var(--muted);font-size:14.5px;line-height:1.7;margin-top:12px;">Static, binary rules — block this IP, cap this deposit — degrade fast against adaptive fraud, and don't reflect the operational reality of emerging-market B2B operators: mobile money payments, retail agent networks, fragmented identity infrastructure, USSD sessions with no persistent device fingerprint. Manual review doesn't scale as new operators onboard.</p>
+        <p style="color:var(--muted);font-size:14.5px;line-height:1.7;margin-top:12px;">My priorities: moving detection from static thresholds toward a hybrid model — rules for known patterns, scoring for everything else — so a genuinely new fraud pattern doesn't need a hard-coded rule written before it can be caught. Structuring detection logic around Trigger → Condition → Action so Risk Ops can read and reason about any rule the same way, regardless of which system raised it. Building progressive, risk-based KYC so verification escalates only when triggered by deposit thresholds, withdrawal requests, or behavioural flags.</p>
+
+        <div class="chapter-tag">
+          <span class="ct-num">02</span>
+          <span class="ct-title">Operating model in action · prototype</span>
+          <span class="ct-line"></span>
+        </div>
+        <div class="shot shot-primary">
+          <div class="product-header">
+            <span class="ph-name">Named Fraud Patterns</span>
+            <span class="ph-tag">Risk posture</span>
+          </div>
+          <div class="story-why">A risk dashboard is useless if it only shows numbers — Risk Ops needs to see which class of abuse is spiking, not just that something is.</div>
+          <div class="browser-frame">
+            <div class="browser-frame-bar"><span></span><span></span><span></span><span class="bf-title">risk-platform-simulator · dashboard</span></div>
+            <img src="assets/risk-simulator-dashboard.jpg" alt="Risk platform dashboard with alerts, high-risk players, cases and fraud patterns">
+          </div>
+          <div class="shot-caption">KPIs: alerts, high-risk players, pending cases, exposure. Fraud patterns broken down by named class — Bonus Abuse, VPN User, Multi Account, Withdrawal Abuse.</div>
+          <ul class="story-caps">
+            <li class="story-cap">Named-pattern taxonomy — maps to defenses</li>
+            <li class="story-cap">Live risk posture at a glance</li>
+            <li class="story-cap">Case-work queue prioritization</li>
+            <li class="story-cap">Investigation performance visible</li>
+          </ul>
+        </div>
+        <div class="shot shot-primary" style="margin-top:18px;">
+          <div class="product-header">
+            <span class="ph-name">Testable Rules</span>
+            <span class="ph-tag">Trigger → Condition → Action</span>
+          </div>
+          <div class="story-why">A rule engine that can't be tested against synthetic events is one Compliance won't sign off on.</div>
+          <div class="browser-frame">
+            <div class="browser-frame-bar"><span></span><span></span><span></span><span class="bf-title">risk-platform-simulator · simulator</span></div>
+            <img src="assets/risk-simulator-events.jpg" alt="Event simulator with custom event builder and expected outcomes">
+          </div>
+          <div class="shot-caption">Fire synthetic events (deposit, chargeback, VPN login) with expected outcomes declared upfront. Every rule is testable against a known input.</div>
+          <ul class="story-caps">
+            <li class="story-cap">Custom event builder</li>
+            <li class="story-cap">Expected outcomes declared upfront</li>
+            <li class="story-cap">Trigger → Condition → Action model</li>
+            <li class="story-cap">Regression-testable before deploy</li>
+          </ul>
+        </div>
+
+        <div class="case-cols">
+          <div class="case-col">
+            <div class="lbl">Problem</div>
+            <p>Emerging-market fraud doesn't look like European fraud. Mobile money, retail agents, USSD sessions, and fragmented ID infrastructure make static rules degrade quickly and manual review too expensive to scale as new operators onboard.</p>
+          </div>
+          <div class="case-col">
+            <div class="lbl">Approach</div>
+            <p>Move from rules-only to hybrid (rules + scoring). Structure every rule around Trigger → Condition → Action so Risk Ops can author and audit them without Engineering. Layer in progressive KYC — verification escalates on behavioural flags, not on registration.</p>
+          </div>
+          <div class="case-col outcome">
+            <div class="lbl">Outcome</div>
+            <p>Current focus, not a closed case study. Direction: fewer manual reviews per fraud dollar caught, a scoring layer that keeps pace with fraud patterns specific to mobile money and retail-agent networks, and rules Risk Ops can rewrite without a deploy. The prize isn't just catching abuse — it's not flagging legitimate players, and giving operators a defensible audit trail when regulators ask.</p>
+          </div>
+        </div>
+        <div style="margin-top:20px;">
+          <a href="https://risk-platform-simulator.vercel.app" target="_blank" rel="noopener" class="btn btn-primary">Prototype ↗</a>
+        </div>
+        <div class="memorable-close">Good rules explain themselves. That's the property that decides whether Risk Ops trusts a system enough to author their own — or gives up and asks Engineering.</div>
+      </div>
+
+      <!-- CASE 2: NUX -->
+      <div class="case">
+        <div class="case-top">
+          <div class="case-head">
+            <div class="case-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div>
+              <div class="case-title">CRM and affiliate infrastructure for a multi-brand platform — at NuxGame</div>
+              <div class="tags">
+                <span class="tag">CRM</span>
+                <span class="tag">Affiliate Systems</span>
+                <span class="tag">Compliance</span>
+                <span class="tag">Segmentation</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="scope-strip">
+          <span class="lbl">System coverage:</span>
+          <span class="chip-s">Multi-brand platform</span>
+          <span class="chip-s">Weighted segmentation engine</span>
+          <span class="chip-s">Per-region GEO rules</span>
+          <span class="chip-s">Affiliate ID exceptions</span>
+          <span class="chip-s">Real-time postback attribution</span>
+        </div>
+        <div class="owned-strip">
+          <strong>My call</strong>
+          Chose deterministic ranked rules over overlapping one-off segment logic. Balanced GEO compliance against affiliate conversion by pairing soft-block UX with affiliate-ID exceptions.
+        </div>
+
+        <div class="crm-diagram" aria-label="Segmentation flow: player attributes and context feed into ranked include/exclude rules, resolving deterministically into a segment; GEO and affiliate exceptions then determine promotion eligibility.">
+          <svg viewBox="0 0 720 190" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="crmarr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+                <path d="M0 0 L10 5 L0 10 z" fill="#0f766e"/>
+              </marker>
+            </defs>
+            <g font-family="Inter, system-ui, sans-serif">
+              <!-- Row 1 -->
+              <rect x="10" y="20" width="150" height="54" rx="8" fill="#fffdf9" stroke="#e8e1d3"/>
+              <text x="85" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#292520">Player attributes</text>
+              <text x="85" y="59" text-anchor="middle" font-size="10.5" fill="#6b6459">country, VIP tier, cohort</text>
+
+              <line x1="165" y1="47" x2="200" y2="47" stroke="#0f766e" stroke-width="1.6" marker-end="url(#crmarr)"/>
+
+              <rect x="205" y="20" width="170" height="54" rx="8" fill="#f2ede3" stroke="#e8e1d3"/>
+              <text x="290" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#292520">Ranked include/exclude</text>
+              <text x="290" y="59" text-anchor="middle" font-size="10.5" fill="#6b6459">weighted rule sets</text>
+
+              <line x1="380" y1="47" x2="415" y2="47" stroke="#0f766e" stroke-width="1.6" marker-end="url(#crmarr)"/>
+
+              <rect x="420" y="20" width="170" height="54" rx="8" fill="#fffdf9" stroke="#0f766e" stroke-width="1.5"/>
+              <text x="505" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#0f766e">Deterministic segment</text>
+              <text x="505" y="59" text-anchor="middle" font-size="10.5" fill="#6b6459">one player → one segment</text>
+
+              <!-- Down arrow -->
+              <line x1="505" y1="79" x2="505" y2="105" stroke="#0f766e" stroke-width="1.6" marker-end="url(#crmarr)"/>
+
+              <!-- Row 2 -->
+              <rect x="210" y="110" width="180" height="54" rx="8" fill="#f2ede3" stroke="#e8e1d3"/>
+              <text x="300" y="132" text-anchor="middle" font-size="12" font-weight="700" fill="#292520">GEO + time restrictions</text>
+              <text x="300" y="149" text-anchor="middle" font-size="10.5" fill="#6b6459">soft-block UX · region windows</text>
+
+              <line x1="395" y1="137" x2="415" y2="137" stroke="#0f766e" stroke-width="1.6" marker-end="url(#crmarr)"/>
+
+              <rect x="420" y="110" width="170" height="54" rx="8" fill="#fffdf9" stroke="#e8e1d3"/>
+              <text x="505" y="132" text-anchor="middle" font-size="12" font-weight="700" fill="#292520">Promotion eligibility</text>
+              <text x="505" y="149" text-anchor="middle" font-size="10.5" fill="#6b6459">or communication targeting</text>
+
+              <line x1="505" y1="79" x2="505" y2="90" stroke="none"/>
+              <line x1="505" y1="79" x2="300" y2="105" stroke="#0f766e" stroke-width="1.6" stroke-dasharray="4,3" marker-end="url(#crmarr)"/>
+
+              <!-- Affiliate exception -->
+              <rect x="10" y="110" width="180" height="54" rx="8" fill="#fffdf9" stroke="#b45309" stroke-dasharray="4,3"/>
+              <text x="100" y="132" text-anchor="middle" font-size="12" font-weight="700" fill="#b45309">Affiliate ID exception</text>
+              <text x="100" y="149" text-anchor="middle" font-size="10.5" fill="#6b6459">approved traffic bypasses block</text>
+
+              <line x1="195" y1="137" x2="205" y2="137" stroke="#b45309" stroke-width="1.6" stroke-dasharray="4,3" marker-end="url(#crmarr)"/>
+              <path d="M195 137 Q 210 137 210 137" fill="none" stroke="#b45309"/>
+            </g>
+          </svg>
+          <div class="shot-caption" style="text-align:center;margin-top:4px;"><strong>Segmentation + GEO + affiliate flow.</strong> Player attributes resolve deterministically into one segment. GEO and time rules apply next. Affiliate-ID exceptions (dashed amber) bypass compliance blocks for approved traffic.</div>
+        </div>
+
+        <div class="case-cols">
+          <div class="case-col">
+            <div class="lbl">Problem</div>
+            <p>Operators needed regionally compliant marketing without losing affiliate-driven conversion.
+            Players needed relevant offers, not untargeted spam. And the underlying segmentation logic had to
+            stay maintainable as region rules and campaigns kept multiplying.</p>
+          </div>
+          <div class="case-col">
+            <div class="lbl">Approach</div>
+            <p>Specified a weighted segmentation engine — players matched against ranked include/exclude rule
+            sets so targeting resolves deterministically even when multiple rules could apply. Designed a
+            GEO-blocking system around a soft-block UX plus time-based restriction windows and affiliate-ID
+            exceptions. Owned the postback and attribution implementation connecting registration and deposit
+            events back to affiliate tracking codes in real time.</p>
+          </div>
+          <div class="case-col outcome">
+            <div class="lbl">Outcome</div>
+            <p>Operators could configure segmentation, GEO rules, and affiliate exceptions themselves — no new
+            engineering request every time a region's rules changed. Marketing shipped campaigns; Compliance
+            audited them; Engineering stopped being the bottleneck. Players got the right offer in the right
+            region instead of irrelevant blanket comms.</p>
+          </div>
+        </div>
+        <div class="memorable-close">Operators configure behaviour. Engineers extend the platform. That's the deal.</div>
+      </div>
+
+      <!-- CASE 3: PROMOTIONS -->
+      <div class="case">
+        <div class="case-top">
+          <div class="case-head">
+            <div class="case-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 7h-9l-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M12 12v4M9 14h6"/></svg></div>
+            <div>
+              <div class="case-title">Promotions an operator can trust — from cashback math to gamified retention</div>
+              <div class="tags">
+                <span class="tag">Promotions</span>
+                <span class="tag">Bonus Abuse Prevention</span>
+                <span class="tag">Gamification</span>
+                <span class="tag">Formula Design</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="scope-strip">
+          <span class="lbl">Product complexity:</span>
+          <span class="chip-s">Multi-currency</span>
+          <span class="chip-s">Per-currency caps</span>
+          <span class="chip-s">House-edge ceiling</span>
+          <span class="chip-s">Dual-currency achievements</span>
+          <span class="chip-s">Trigger-based conditions</span>
+        </div>
+        <div class="owned-strip">
+          <strong>My call</strong>
+          Gave Risk and Finance configurable exposure controls <em>before</em> promotion launch — house-edge ceiling and per-currency caps, not opt-in flags applied after abuse was detected.
+        </div>
+
+        <div class="promo-visual">
+          <div class="shot-primary">
+            <div class="product-header">
+              <span class="ph-name">Exposure Controls</span>
+              <span class="ph-tag">Bound before launch</span>
+            </div>
+            <div class="story-why">Finance and Risk need to bound worst-case rakeback payout before Marketing launches the promotion — not after players find the loophole.</div>
+            <div class="browser-frame">
+              <div class="browser-frame-bar"><span></span><span></span><span></span><span class="bf-title">promotions · rakeback · formula preview</span></div>
+              <div class="annotated">
+                <img src="assets/tight-rakeback-formula.jpg" alt="Rakeback formula configuration panel showing exposure controls">
+                <span class="callout" style="top:22%;left:32%;">Player wager</span>
+                <span class="callout" style="top:40%;left:38%;">House-edge cap</span>
+                <span class="callout" style="top:75%;left:22%;">Effective HE floor</span>
+              </div>
+            </div>
+            <div class="shot-caption">Every term operator-configurable — base rakeback %, per-currency caps, and the house-edge ceiling that bounds worst-case payout.</div>
+            <ul class="story-caps">
+              <li class="story-cap">Base rakeback % — operator-set</li>
+              <li class="story-cap">House-edge cap — bounds worst case</li>
+              <li class="story-cap">Per-currency exposure caps</li>
+              <li class="story-cap">HE floor prevents high-RTP farming</li>
+            </ul>
+          </div>
+          <div class="formula-callout" aria-label="Simplified formulas for cashback and rakeback with exposure caps.">
+            <div class="fc-title">Cashback — Eligible Net Loss</div>
+            <div>
+              <span class="k">ENL</span> = Deposits − Withdrawals<br>
+              &nbsp;&nbsp;&nbsp;− (Wallet − ExcludedBalance)<br>
+              &nbsp;&nbsp;&nbsp;− OpenBets − Rollbacks
+              <div class="c">Only money genuinely lost pays out.</div>
+            </div>
+            <div>
+              <div class="fc-title" style="margin-bottom:8px;">Rakeback — bounded exposure</div>
+              <span class="k">Rakeback</span> = Wager × EffHE × BaseRake% × Override%<br>
+              <span class="k">EffHE</span> = min(<span class="v">100 − RTP</span>, <span class="v">HE Cap</span>)
+              <div class="c">Cap ensures no game can inflate rakeback beyond the ceiling.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-cols">
+          <div class="case-col">
+            <div class="lbl">Problem</div>
+            <p>Promotion mechanics are a direct abuse surface — players time deposits and withdrawals around a
+            cashback window, or count funds never actually at risk toward a loss calculation. Operators also
+            wanted richer retention mechanics without engineering building a new reward type each time.</p>
+          </div>
+          <div class="case-col">
+            <div class="lbl">Approach</div>
+            <p>Designed the Eligible Net Loss cashback formula. Specified a rakeback engine bounded by
+            per-currency caps and a house-edge ceiling. Added a dual-currency achievement system (XP + Shop
+            Points) with trigger-based conditions — login streaks, category turnover, KYC completion, deposit
+            count — tied to configurable rewards.</p>
+          </div>
+          <div class="case-col outcome">
+            <div class="lbl">Outcome</div>
+            <p>Risk and Finance could bound worst-case exposure before a promotion launched — not scramble
+            after abuse was detected. Marketing could launch new reward mechanics from the operator surface
+            without a new engineering ticket. Players got promotions that rewarded genuine play, not the
+            ability to game a formula.</p>
+          </div>
+        </div>
+        <div style="margin-top:20px;">
+          <a href="https://rakeback-mvp.vercel.app/admin/simulator" target="_blank" rel="noopener" class="btn btn-primary">Rakeback simulator ↗</a>
+        </div>
+        <div class="memorable-close">The point isn't the config panel. It's sustainable promotions that balance player engagement with commercial performance — and don't get gamed six weeks after launch.</div>
+        <div class="abuse-header">Abuse patterns defended</div>
+        <div class="abuse-grid">
+          <div class="abuse-card">
+            <div class="ac-title">Cashback timing abuse</div>
+            <div class="ac-body">Deposit, absorb a small loss, withdraw before the reset. <strong>Defended by</strong> ENL formula excluding wallet balance not sourced from the current-window deposit; rollbacks reversed.</div>
+          </div>
+          <div class="abuse-card">
+            <div class="ac-title">Rakeback rate exploitation</div>
+            <div class="ac-body">Farming high-RTP games to inflate rakeback. <strong>Defended by</strong> house-edge ceiling capping the effective rakeback rate regardless of game selection.</div>
+          </div>
+          <div class="abuse-card">
+            <div class="ac-title">Achievement farming</div>
+            <div class="ac-body">Repeating trivial actions to accumulate XP or Shop Points. <strong>Defended by</strong> turnover-based conditions that require real wager volume, not action count.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CASE 4: PVP (personal build) -->
+      <div class="case case-featured" id="pvp">
+        <div class="case-top">
+          <div class="case-head">
+            <div class="case-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/></svg></div>
+            <div>
+              <div class="case-title">PVP Slot Arena — peer-to-peer casino architecture, explored end to end</div>
+              <div class="tags">
+                <span class="tag tag-featured">End-to-end Exploration</span>
+                <span class="tag">Gamification</span>
+                <span class="tag">Wallet/FX Logic</span>
+                <span class="tag">Full-Stack Prototype</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="scope-strip">
+          <span class="lbl">Scope:</span>
+          <span class="chip-s">Concept → system design → running build</span>
+          <span class="chip-s">Player + admin views</span>
+          <span class="chip-s">Locked FX wallet</span>
+          <span class="chip-s">3 configurable win conditions</span>
+          <span class="chip-s">Operator reporting</span>
+        </div>
+        <div class="owned-strip">
+          <strong>Ownership</strong>
+          Concept, system design, wallet-and-FX logic, admin configuration surface, player UX, battle-simulation engine — self-directed end to end, built with Lovable.
+        </div>
+
+        <div class="chapter-tag">
+          <span class="ct-num">01</span>
+          <span class="ct-title">Player experience</span>
+          <span class="ct-line"></span>
+        </div>
+        <div class="shot shot-primary">
+          <div class="product-header">
+            <span class="ph-name">Battle Discovery</span>
+            <span class="ph-tag">Player entry point</span>
+          </div>
+          <div class="story-why">Players won't join a lobby they can't scan in three seconds — entry, spins, players, and pot must all be visible before they commit.</div>
+          <div class="browser-frame">
+            <div class="browser-frame-bar"><span></span><span></span><span></span><span class="bf-title">pvp-slot-arena · battle-lobby</span></div>
+            <img src="assets/pvp-battle-lobby.jpg" alt="PVP Slot Arena battle lobby with three live battles">
+          </div>
+          <div class="shot-caption">Three battle types running simultaneously — each with its own entry fee, spin count, and live pot.</div>
+          <ul class="story-caps">
+            <li class="story-cap">Three battle types in parallel</li>
+            <li class="story-cap">Entry, spins, players, pot at a glance</li>
+            <li class="story-cap">Timer-to-start visible per battle</li>
+            <li class="story-cap">Enabled providers surfaced upfront</li>
+          </ul>
+        </div>
+
+        <div class="chapter-tag">
+          <span class="ct-num">02</span>
+          <span class="ct-title">Operator configuration</span>
+          <span class="ct-line"></span>
+        </div>
+        <div class="shot-two">
+          <div>
+            <div class="product-header">
+              <span class="ph-name">Operator Reporting</span>
+              <span class="ph-tag">Run &amp; price</span>
+            </div>
+            <div class="story-why">Operators won't run a new game mode without knowing turnover, fees, and failure rate live.</div>
+            <div class="browser-frame">
+              <div class="browser-frame-bar"><span></span><span></span><span></span><span class="bf-title">admin · dashboard</span></div>
+              <img src="assets/pvp-admin-dashboard.jpg" alt="PVP Slot Arena admin dashboard with turnover, fees, participants, and recent battles">
+            </div>
+            <div class="shot-caption">Live turnover, platform fees, participants, and battle history.</div>
+            <ul class="story-caps">
+              <li class="story-cap">Live turnover &amp; fee income</li>
+              <li class="story-cap">Participant count</li>
+              <li class="story-cap">Battle-status breakdown</li>
+              <li class="story-cap">Failure-rate visibility</li>
+            </ul>
+          </div>
+          <div>
+            <div class="product-header">
+              <span class="ph-name">Configurable Win Conditions</span>
+              <span class="ph-tag">Config, not code</span>
+            </div>
+            <div class="story-why">Different games need different win conditions — Max Winnings for high-variance slots, Consecutive Wins for streak-friendly ones.</div>
+            <div class="browser-frame">
+              <div class="browser-frame-bar"><span></span><span></span><span></span><span class="bf-title">admin · conditions</span></div>
+              <img src="assets/pvp-admin-conditions.jpg" alt="PVP Slot Arena admin conditions with battle-type toggles and spin range">
+            </div>
+            <div class="shot-caption">Three win conditions and spin range — operator-toggleable.</div>
+            <ul class="story-caps">
+              <li class="story-cap">Battle-type toggles per game</li>
+              <li class="story-cap">Configurable spin-range bounds</li>
+              <li class="story-cap">Platform-fee override</li>
+              <li class="story-cap">Operator-independent config</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="chapter-tag">
+          <span class="ct-num">03</span>
+          <span class="ct-title">Wallet flow</span>
+          <span class="ct-line"></span>
+        </div>
+
+        <div class="wallet-flow" aria-label="PVP wallet flow: real wallet converts to EUR PVP wallet, locks for the duration of the battle, resolves back to the real wallet.">
+          <svg viewBox="0 0 720 130" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+                <path d="M0 0 L10 5 L0 10 z" fill="#0f766e"/>
+              </marker>
+            </defs>
+            <g font-family="Inter, system-ui, sans-serif">
+              <rect x="10" y="35" width="130" height="60" rx="8" fill="#fffdf9" stroke="#e8e1d3"/>
+              <text x="75" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="#292520">Real Wallet</text>
+              <text x="75" y="78" text-anchor="middle" font-size="10.5" fill="#6b6459">any currency</text>
+
+              <line x1="145" y1="65" x2="180" y2="65" stroke="#0f766e" stroke-width="1.6" marker-end="url(#arr)"/>
+
+              <rect x="185" y="35" width="130" height="60" rx="8" fill="#f2ede3" stroke="#e8e1d3"/>
+              <text x="250" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="#292520">EUR Conversion</text>
+              <text x="250" y="78" text-anchor="middle" font-size="10.5" fill="#6b6459">rate locked</text>
+
+              <line x1="320" y1="65" x2="355" y2="65" stroke="#0f766e" stroke-width="1.6" marker-end="url(#arr)"/>
+
+              <rect x="360" y="35" width="130" height="60" rx="8" fill="#fffdf9" stroke="#0f766e" stroke-width="1.5"/>
+              <text x="425" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="#0f766e">PVP Wallet</text>
+              <text x="425" y="78" text-anchor="middle" font-size="10.5" fill="#6b6459">locked · in play</text>
+
+              <line x1="495" y1="65" x2="530" y2="65" stroke="#0f766e" stroke-width="1.6" marker-end="url(#arr)"/>
+
+              <rect x="535" y="35" width="130" height="60" rx="8" fill="#f2ede3" stroke="#e8e1d3"/>
+              <text x="600" y="55" text-anchor="middle" font-size="12" font-weight="700" fill="#292520">Battle</text>
+              <text x="600" y="72" text-anchor="middle" font-size="10.5" fill="#6b6459">max wins /</text>
+              <text x="600" y="86" text-anchor="middle" font-size="10.5" fill="#6b6459">multiplier / streak</text>
+
+              <path d="M600 100 Q 600 115 500 115 L 75 115 Q 30 115 30 100" fill="none" stroke="#0f766e" stroke-width="1.4" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+              <text x="360" y="128" text-anchor="middle" font-size="10.5" fill="#6b6459" font-style="italic">Resolution · winnings return to Real Wallet in original currency</text>
+            </g>
+          </svg>
+          <div class="shot-caption" style="text-align:center;margin-top:4px;"><strong>Wallet-flow diagram.</strong> Funds are converted to EUR and locked in a separate PVP wallet for the duration of a battle, then resolved back to the player's real wallet in original currency.</div>
+        </div>
+
+        <div class="chapter-tag">
+          <span class="ct-num">04</span>
+          <span class="ct-title">Build scope</span>
+          <span class="ct-line"></span>
+        </div>
+        <div class="built-strip" aria-label="Areas included in this prototype">
+          <span class="bs-title">Architecture explored:</span>
+          <span class="bs-item">Concept</span><span class="bs-sep">·</span>
+          <span class="bs-item">System design</span><span class="bs-sep">·</span>
+          <span class="bs-item">Wallet + FX logic</span><span class="bs-sep">·</span>
+          <span class="bs-item">Admin configuration</span><span class="bs-sep">·</span>
+          <span class="bs-item">Player UX</span><span class="bs-sep">·</span>
+          <span class="bs-item">Battle simulation</span><span class="bs-sep">·</span>
+          <span class="bs-item">Cancellation &amp; penalty logic</span>
+        </div>
+
+        <div class="case-cols">
+          <div class="case-col">
+            <div class="lbl">Problem</div>
+            <p>Standard slot mechanics are single-player against the house. A PVP structure — two players on the
+            same game, same stake, winner takes the pot — needs a way to isolate at-risk funds from a player's
+            main balance, define a fair win condition beyond raw multiplier luck, and let an operator bound its
+            own exposure.</p>
+          </div>
+          <div class="case-col">
+            <div class="lbl">Approach</div>
+            <p>Designed a locked PVP wallet with EUR conversion so battle stakes are ring-fenced regardless of
+            deposit currency. Three configurable battle types (Max Winnings, Max Multiplier, Consecutive Wins)
+            let operators pick the win condition that fits a given game's volatility. Built the operator tooling
+            covering entry fees, provider/game eligibility, feature toggles, and GGR/turnover/fee reporting; a
+            cancellation and penalty structure so incomplete battles resolve predictably.</p>
+          </div>
+          <div class="case-col outcome">
+            <div class="lbl">Outcome</div>
+            <p>A live end-to-end build — battle creation, join, resolution, and operator reporting all
+            playable. The exercise: prove I can move from concept through system design (wallet, FX,
+            battle-resolution logic, operator autonomy) to a running product, not just the design half of it.</p>
+          </div>
+        </div>
+        <div style="margin-top:20px;">
+          <a href="https://pvp-slot-arena.lovable.app" target="_blank" rel="noopener" class="btn btn-primary">Prototype ↗</a>
+        </div>
+        <div class="memorable-close">The concept was the easy part. The wallet math is what makes it operator-ready.</div>
+      </div>
+
+      <!-- CASE 5: LEAP -->
+      <div class="case">
+        <div class="case-top">
+          <div class="case-head">
+            <div class="case-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18M5 6c4 3 10 3 14 0M5 18c4-3 10-3 14 0"/></svg></div>
+            <div>
+              <div class="case-title">Building a virtual sports roadmap across retail and digital — at Leap Gaming</div>
+              <div class="tags">
+                <span class="tag">Product Strategy</span>
+                <span class="tag">Retail</span>
+                <span class="tag">Virtual Sports</span>
+                <span class="tag">Cross-functional Delivery</span>
+                <span class="tag">BI/Analytics</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="scope-strip">
+          <span class="lbl">Delivery scope:</span>
+          <span class="chip-s">4+ titles shipped</span>
+          <span class="chip-s">Retail + digital channels</span>
+          <span class="chip-s">Multi-market</span>
+          <span class="chip-s">~13-month delivery program</span>
+          <span class="chip-s">3 workstreams</span>
+        </div>
+        <div class="owned-strip">
+          <strong>My role</strong>
+          Owned the roadmap; aligned game-engine, cashier-interface, and satellite-delivery workstreams. Balanced retail-cabinet constraints against a mobile-first product for low-connectivity markets.
+        </div>
+
+        <div class="shot" style="max-width:680px;margin:18px auto 0;">
+          <div class="product-header">
+            <span class="ph-name">Multi-market Betslip</span>
+            <span class="ph-tag">Euroleague Legends · Licensed</span>
+          </div>
+          <div class="story-why" style="text-align:center;margin-left:auto;margin-right:auto;">Retail players want to build combinations without leaving the game view. Every extra screen loses the bet.</div>
+          <div class="browser-frame browser-frame--natural">
+            <div class="browser-frame-bar"><span></span><span></span><span></span><span class="bf-title">euroleague-legends · match 13</span></div>
+            <img src="assets/leap-euroleague-legends.jpg" alt="Euroleague Legends betslip with multi-market bet builder">
+          </div>
+          <div class="shot-caption" style="text-align:center;margin-top:10px;">Singles, trebles, doubles, and system bets simultaneously — markets switchable per match without leaving the game.</div>
+          <ul class="story-caps" style="max-width:640px;margin-left:auto;margin-right:auto;">
+            <li class="story-cap">Multi-bet types in one slip</li>
+            <li class="story-cap">Markets switchable per match</li>
+            <li class="story-cap">Officially licensed content</li>
+            <li class="story-cap">Persistent betslip state</li>
+          </ul>
+        </div>
+        <div class="leap-features">
+          <div class="leap-feature">
+            <div class="product-header">
+              <span class="ph-name">Retail Cashier Flow</span>
+              <span class="ph-tag">Football Cup — World</span>
+            </div>
+            <div class="story-why">The cashier hands the ticket back within seconds. Every screen between market selection and print is a lost bet.</div>
+            <div class="browser-frame">
+              <div class="browser-frame-bar"><span></span><span></span><span></span><span class="bf-title">football-cup · matchday</span></div>
+              <img src="assets/leap-football-cup-world.jpg" alt="Virtual football tournament: Open/Closed bets and Next Matchup grid">
+            </div>
+            <div class="lf-caption">Bet-history split by Open/Closed with a persistent Next Matchup grid — designed for retail terminals.</div>
+            <ul class="story-caps">
+              <li class="story-cap">Open/Closed history split</li>
+              <li class="story-cap">Next Matchup always visible</li>
+              <li class="story-cap">Print-optimized layout</li>
+              <li class="story-cap">TV + cashier friendly</li>
+            </ul>
+          </div>
+          <div class="leap-feature">
+            <div class="product-header">
+              <span class="ph-name">Mobile-first Skip Flow</span>
+              <span class="ph-tag">Football Streak Champions</span>
+            </div>
+            <div class="story-why">In low-connectivity markets, animation is a data-cost tax. Skip-to-Outcome respects that.</div>
+            <div class="browser-frame">
+              <div class="browser-frame-bar"><span></span><span></span><span></span><span class="bf-title">streak-champions · live</span></div>
+              <img src="assets/leap-football-streak-champions.jpg" alt="Football Streak Champions in-play with go-to-outcome control">
+            </div>
+            <div class="lf-caption">Skip-to-Outcome is a session-length and data-cost decision, not a nice-to-have.</div>
+            <ul class="story-caps">
+              <li class="story-cap">Mobile-first UX</li>
+              <li class="story-cap">Skip animation to result</li>
+              <li class="story-cap">Session-length aware</li>
+              <li class="story-cap">Data-cost-conscious</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="case-cols">
+          <div class="case-col">
+            <div class="lbl">Problem</div>
+            <p>Grow from a handful of virtual sports titles into a portfolio spanning retail (TV/cabinet),
+            mobile, and licensed branded content — competing against established virtual sports providers.
+            Decisions were being made without a clear read on which mechanics drove engagement.</p>
+          </div>
+          <div class="case-col">
+            <div class="lbl">Approach</div>
+            <p>Owned the roadmap end to end: PRDs for a mobile-first basketball title for low-connectivity
+            markets, a retail football league product (big-screen TV plus cashier flow), an officially licensed
+            branded basketball game, and racing-streak upgrades. Ran a ~13-month cross-functional delivery
+            program across game engine, cashier interface, and satellite delivery. Used analytics event
+            tracking to define what "engagement" meant per product before feeding that into UX and bonus specs.</p>
+          </div>
+          <div class="case-col outcome">
+            <div class="lbl">Outcome</div>
+            <p>Operators went live with a virtual sports portfolio across both retail cabinets and digital
+            channels. The event-tracking layer became the repeatable basis for how the team prioritized the
+            next wave of features — no more product intuition alone.</p>
+          </div>
+        </div>
+        <div class="memorable-close">Different channels aren't different features. They're different products with different constraints.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="approach">
+  <div class="wrap">
+    <div class="eyebrow">How I Think</div>
+    <h2>Three principles I apply to every product decision.</h2>
+    <p class="section-intro">
+      Reusable across risk, promotions, platform work — grounded in real product decisions I've shipped.
+    </p>
+    <div class="principles">
+      <div class="principle">
+        <div class="idx">01</div>
+        <h3>Root problem, not surface request</h3>
+        <p>Stakeholders describe symptoms, not causes. Digging past the ask to what's actually broken — then
+        proposing what they wouldn't have thought to ask for — is where product judgment lives.</p>
+        <div class="ex"><strong>Example:</strong> when Marketing asked for "more segment fields," the real
+        problem was that segments resolved unpredictably when rules overlapped. We rebuilt segmentation around
+        ranked include/exclude rules so one player always resolves to one segment — deterministic, auditable,
+        safe to configure without Engineering.</div>
+      </div>
+      <div class="principle">
+        <div class="idx">02</div>
+        <h3>Force multiplier, not just a tool</h3>
+        <p>A back-office system is judged on how much more its users can do with it — bulk actions, shortcuts,
+        automation of the repetitive — not on whether a new screen exists.</p>
+        <div class="ex"><strong>Example:</strong> a rakeback config that lets Marketing launch a promotion
+        without an engineering ticket is worth more than a rakeback dashboard for Product. Ship the config
+        surface first; the dashboard is a nice-to-have.</div>
+      </div>
+      <div class="principle">
+        <div class="idx">03</div>
+        <h3>Trigger → Condition → Action</h3>
+        <p>A shared operating model for every rule in a risk system. Traders, Risk Ops, Engineering, and
+        Compliance all read a rule the same way: what event fires it, what must be true, what happens next.
+        This lets Risk Ops author and tune rules without Engineering, keeps every rule explainable to auditors,
+        and makes rule regression testing tractable.</p>
+        <div class="ex"><strong>Example:</strong> a high-velocity deposit rule fires on <span class="mono">deposit_event</span>,
+        requires <span class="mono">count(deposits, 1h) > 5 AND avg_amount > baseline × 3</span>, and executes
+        <span class="mono">raise_alert(severity: high, assign: risk_ops_queue)</span>. One vocabulary.
+        Auditable. Testable. Rewritable in production without a deploy.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="eyebrow">Toolkit</div>
+    <h2>Where the domain depth sits.</h2>
+    <p class="section-intro">
+      Six areas that keep coming up across my product work — each anchored in a case above or in the current
+      role.
+    </p>
+    <div class="skillrow">
+      <span class="chip">Platform product</span>
+      <span class="chip">CRM &amp; Promotions</span>
+      <span class="chip">Wallet &amp; FX logic</span>
+      <span class="chip">Rule engines</span>
+      <span class="chip">Risk scoring &amp; KYC</span>
+      <span class="chip">Trading-floor instincts</span>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="eyebrow">Experience</div>
+    <h2>Career timeline.</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-when mono">Current</div>
+        <div>
+          <div class="tl-role">Senior Product Manager — Risk Systems</div>
+          <div class="tl-company">B2Tech</div>
+          <div class="tl-desc">Product ownership for fraud &amp; risk systems at an omnichannel B2B provider
+          focused on emerging markets — sportsbook, casino, payments, CRM, back office.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when mono">2023 – 2026</div>
+        <div>
+          <div class="tl-role">Product Manager</div>
+          <div class="tl-company">NuxGame</div>
+          <div class="tl-desc">B2B iGaming platform PM — CRM and affiliate infrastructure, segmentation,
+          GEO/compliance tooling, promotions and gamification specs.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when mono">2022 – 2023</div>
+        <div>
+          <div class="tl-role">Product Manager, Virtual Sportsbook</div>
+          <div class="tl-company">Leap Gaming</div>
+          <div class="tl-desc">Owned the virtual sports roadmap across retail and digital — PRDs,
+          cross-functional delivery, BI-driven UX decisions.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when mono">2021 – 2022</div>
+        <div>
+          <div class="tl-role">Product Manager, Retail Sportsbook</div>
+          <div class="tl-company">Playtech Sports</div>
+          <div class="tl-desc">B2B retail sportsbook product, working with operators including OPAP,
+          PaddyPower, and Entain.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when mono">2017 – 2021</div>
+        <div>
+          <div class="tl-role">Data &amp; Trading Analyst</div>
+          <div class="tl-company">Playtech</div>
+          <div class="tl-desc">KPIs, data warehouses, betting pattern analysis, and risk reporting.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when mono">2015 – 2017</div>
+        <div>
+          <div class="tl-role">Senior Sportsbook Manager</div>
+          <div class="tl-company">Betologic Cyprus</div>
+          <div class="tl-desc">Sportsbook management and trading oversight.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when mono">2013 – 2015</div>
+        <div>
+          <div class="tl-role">Senior European Sports Trader</div>
+          <div class="tl-company">OffsideBet</div>
+          <div class="tl-desc">Odds compilation (basketball), in-running trading across football, futsal,
+          tennis, volleyball, ice hockey, and handball — risk management, arbitrage, and bonus abuse
+          identification.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when mono">2006 – 2013</div>
+        <div>
+          <div class="tl-role">European Sports Trader</div>
+          <div class="tl-company">Sportingbet</div>
+          <div class="tl-desc">Odds compilation, in-running trading across futsal, waterpolo, and basketball.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="eyebrow">Contact</div>
+    <h2>If you're building iGaming products where risk, promotions, or player behaviour matter — let's talk.</h2>
+    <p class="section-intro" style="margin-left:auto;margin-right:auto;">
+      Also happy to chat about how the balance between player experience, commercial performance, operator
+      efficiency, and risk actually plays out in production — or about anything specific from the cases above.
+    </p>
+    <div class="contact-links">
+      <a href="mailto:ptsportsbook.com@gmail.com" class="btn btn-primary">ptsportsbook.com@gmail.com</a>
+      <a href="https://www.linkedin.com/in/pantelis-theocharides/" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn ↗</a>
+      <a href="assets/pantelis-theocharides-cv.docx" download class="btn btn-ghost">Download CV</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  © 2026 Pantelis Theocharides · Strovolos, Nicosia
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('mobileNavBtn');
+  var menu = document.getElementById('mobileNavMenu');
+  if(!btn || !menu) return;
+  function open(){
+    menu.hidden = false;
+    btn.setAttribute('aria-expanded', 'true');
+    btn.setAttribute('aria-label', 'Close menu');
+  }
+  function close(){
+    menu.hidden = true;
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-label', 'Open menu');
+  }
+  btn.addEventListener('click', function(){
+    if(menu.hidden) open();
+    else close();
+  });
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', close);
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && !menu.hidden){
+      close();
+      btn.focus();
+    }
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var canvas = document.getElementById('matrixBg');
+  if(!canvas) return;
+  if(window.innerWidth < 720) return;
+  var reduceQuery = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+  var ctx = canvas.getContext('2d');
+  var hero = canvas.parentElement;
+  var glyphs = '0123456789';
+  var fontSize = 16;
+  var columns, drops, active;
+  var rafId = null;
+  var lastTime = 0;
+  var interval = 90;
+
+  function resize(){
+    canvas.width = hero.offsetWidth;
+    canvas.height = hero.offsetHeight;
+    columns = Math.floor(canvas.width / fontSize);
+    drops = new Array(columns).fill(0).map(function(){ return Math.floor(Math.random() * -50); });
+    active = new Array(columns).fill(0).map(function(){ return Math.random() < 0.6; });
+  }
+  function draw(){
+    ctx.fillStyle = 'rgba(250,247,242,0.10)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#0f766e';
+    ctx.font = fontSize + "px 'JetBrains Mono', monospace";
+    for(var i = 0; i < drops.length; i++){
+      if(!active[i]) continue;
+      var ch = glyphs.charAt(Math.floor(Math.random() * glyphs.length));
+      ctx.fillText(ch, i * fontSize, drops[i] * fontSize);
+      if(drops[i] * fontSize > canvas.height && Math.random() > 0.975){
+        drops[i] = 0;
+        active[i] = Math.random() < 0.6;
+      }
+      drops[i]++;
+    }
+  }
+  function loop(t){
+    if(!lastTime) lastTime = t;
+    if(t - lastTime >= interval){
+      draw();
+      lastTime = t;
+    }
+    rafId = requestAnimationFrame(loop);
+  }
+  function reduced(){
+    return reduceQuery && reduceQuery.matches;
+  }
+  function start(){
+    if(rafId !== null) return;
+    if(reduced()) return;
+    if(document.hidden) return;
+    lastTime = 0;
+    rafId = requestAnimationFrame(loop);
+  }
+  function stop(){
+    if(rafId !== null){
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+  document.addEventListener('visibilitychange', function(){
+    if(document.hidden) stop();
+    else start();
+  });
+  if(reduceQuery){
+    var onChange = function(){ if(reduceQuery.matches) stop(); else start(); };
+    if(reduceQuery.addEventListener) reduceQuery.addEventListener('change', onChange);
+    else if(reduceQuery.addListener) reduceQuery.addListener(onChange);
+  }
+  start();
+})();
+</script>
+</body>
+</html>
