@@ -42,10 +42,49 @@
   nav.wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:12px;}
   .brand{font-weight:700;font-size:15px;letter-spacing:-0.02em;}
   .brand span{color:var(--accent);}
-  .navlinks{display:flex;gap:28px;font-size:13px;color:var(--muted);}
+  .navlinks{display:flex;gap:28px;font-size:13px;color:var(--muted);align-items:center;}
+  .navlinks > a{color:var(--muted);}
   .navlinks a:hover,.navlinks a:focus{color:var(--text);}
   .navlinks{display:none;}
   @media(min-width:720px){.navlinks{display:flex;}}
+
+  /* NAV DROPDOWN */
+  .nav-dropdown{position:relative;display:inline-flex;align-items:center;}
+  .nav-dropdown-trigger{display:inline-flex;align-items:center;gap:4px;color:var(--muted);cursor:pointer;}
+  .nav-dropdown-trigger:hover,.nav-dropdown-trigger:focus,.nav-dropdown.open .nav-dropdown-trigger{color:var(--text);}
+  .nav-caret{width:9px;height:6px;transition:transform 160ms ease;color:currentColor;}
+  .nav-dropdown.open .nav-caret{transform:rotate(180deg);}
+  .nav-dropdown-menu{
+    position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%) translateY(-4px);
+    background:var(--bg);border:1px solid var(--line);border-radius:10px;
+    box-shadow:0 12px 32px rgba(0,0,0,0.08);
+    padding:8px;min-width:280px;
+    opacity:0;visibility:hidden;pointer-events:none;
+    transition:opacity 160ms ease,transform 160ms ease,visibility 160ms;
+    z-index:100;
+  }
+  .nav-dropdown.open .nav-dropdown-menu,
+  .nav-dropdown:hover .nav-dropdown-menu,
+  .nav-dropdown:focus-within .nav-dropdown-menu{
+    opacity:1;visibility:visible;pointer-events:auto;transform:translateX(-50%) translateY(0);
+  }
+  .nav-dropdown-menu::before{
+    content:"";position:absolute;top:-6px;left:50%;transform:translateX(-50%) rotate(45deg);
+    width:10px;height:10px;background:var(--bg);border-top:1px solid var(--line);border-left:1px solid var(--line);
+  }
+  .nav-dropdown-menu a{
+    display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+    padding:10px 14px;border-radius:6px;color:var(--text);font-size:13.5px;font-weight:500;
+    white-space:nowrap;
+  }
+  .nav-dropdown-menu a:hover,.nav-dropdown-menu a:focus{background:var(--surface);color:var(--accent);}
+  .nav-dd-co{color:var(--muted2);font-size:12px;font-weight:400;}
+
+  /* Scroll offset so sticky header doesn't cover anchored case titles */
+  #case-risk,#case-crm,#case-promotions,#case-leap,#pvp,#work,#about,#approach,#experience,#contact{scroll-margin-top:80px;}
+
+  /* Mobile sub-nav items indented */
+  .mobile-nav-sub{padding-left:24px !important;font-size:13px !important;color:var(--muted) !important;}
 
   /* MOBILE NAV */
   .mobile-nav-btn{
@@ -456,8 +495,19 @@
     <div class="brand">Pantelis<span>.</span></div>
     <div class="navlinks">
       <a href="#about">About</a>
-      <a href="#work">Work</a>
-      <a href="#pvp">PVP Slot Arena</a>
+      <div class="nav-dropdown" id="workDropdown">
+        <a href="#work" class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+          Work
+          <svg class="nav-caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="nav-dropdown-menu" role="menu">
+          <a href="#case-risk" role="menuitem">Risk &amp; Fraud <span class="nav-dd-co">B2Tech</span></a>
+          <a href="#case-crm" role="menuitem">CRM &amp; Affiliate <span class="nav-dd-co">NuxGame</span></a>
+          <a href="#case-promotions" role="menuitem">Promotions</a>
+          <a href="#case-leap" role="menuitem">Virtual Sports <span class="nav-dd-co">Leap Gaming</span></a>
+          <a href="#pvp" role="menuitem">PVP Slot Arena <span class="nav-dd-co">Personal build</span></a>
+        </div>
+      </div>
       <a href="#approach">Approach</a>
       <a href="#experience">Experience</a>
       <a href="#contact">Contact</a>
@@ -469,8 +519,12 @@
   </nav>
   <div class="mobile-nav-menu" id="mobileNavMenu" hidden>
     <a href="#about">About</a>
-    <a href="#work">Work</a>
-    <a href="#pvp">PVP Slot Arena</a>
+    <a href="#work">Work — all</a>
+    <a href="#case-risk" class="mobile-nav-sub">↳ Risk &amp; Fraud (B2Tech)</a>
+    <a href="#case-crm" class="mobile-nav-sub">↳ CRM &amp; Affiliate (NuxGame)</a>
+    <a href="#case-promotions" class="mobile-nav-sub">↳ Promotions</a>
+    <a href="#case-leap" class="mobile-nav-sub">↳ Virtual Sports (Leap Gaming)</a>
+    <a href="#pvp" class="mobile-nav-sub">↳ PVP Slot Arena</a>
     <a href="#approach">Approach</a>
     <a href="#experience">Experience</a>
     <a href="#contact">Contact</a>
@@ -586,7 +640,7 @@
           <div class="case-head">
             <div class="case-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v6c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V7l8-4z"/></svg></div>
             <div>
-              <div class="case-title">Risk &amp; fraud product for emerging markets — at B2Tech</div>
+              <div class="case-title" id="case-risk">Risk &amp; fraud product for emerging markets — at B2Tech</div>
               <div class="tags">
                 <span class="tag">Risk &amp; Fraud</span>
                 <span class="tag">Hybrid Scoring</span>
@@ -686,7 +740,7 @@
           <div class="case-head">
             <div class="case-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
             <div>
-              <div class="case-title">CRM and affiliate infrastructure for a multi-brand platform — at NuxGame</div>
+              <div class="case-title" id="case-crm">CRM and affiliate infrastructure for a multi-brand platform — at NuxGame</div>
               <div class="tags">
                 <span class="tag">CRM</span>
                 <span class="tag">Affiliate Systems</span>
@@ -795,7 +849,7 @@
           <div class="case-head">
             <div class="case-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 7h-9l-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M12 12v4M9 14h6"/></svg></div>
             <div>
-              <div class="case-title">Promotions an operator can trust — from cashback math to gamified retention</div>
+              <div class="case-title" id="case-promotions">Promotions an operator can trust — from cashback math to gamified retention</div>
               <div class="tags">
                 <span class="tag">Promotions</span>
                 <span class="tag">Bonus Abuse Prevention</span>
@@ -1094,7 +1148,7 @@
           <div class="case-head">
             <div class="case-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18M5 6c4 3 10 3 14 0M5 18c4-3 10-3 14 0"/></svg></div>
             <div>
-              <div class="case-title">Building a virtual sports roadmap across retail and digital — at Leap Gaming</div>
+              <div class="case-title" id="case-leap">Building a virtual sports roadmap across retail and digital — at Leap Gaming</div>
               <div class="tags">
                 <span class="tag">Product Strategy</span>
                 <span class="tag">Retail</span>
@@ -1393,6 +1447,49 @@
     if(e.key === 'Escape' && !menu.hidden){
       close();
       btn.focus();
+    }
+  });
+})();
+
+// Work dropdown — click toggle (hover handled via CSS on desktop)
+(function(){
+  var dd = document.getElementById('workDropdown');
+  if(!dd) return;
+  var trigger = dd.querySelector('.nav-dropdown-trigger');
+  var menu = dd.querySelector('.nav-dropdown-menu');
+  if(!trigger || !menu) return;
+  var caret = trigger.querySelector('.nav-caret');
+
+  // Clicking the caret area (not the "Work" text itself) toggles open — clicking the text still jumps to #work
+  caret.addEventListener('click', function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    var isOpen = dd.classList.toggle('open');
+    trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+
+  // Close on outside click
+  document.addEventListener('click', function(e){
+    if(!dd.contains(e.target) && dd.classList.contains('open')){
+      dd.classList.remove('open');
+      trigger.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Close after selecting a sub-item
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      dd.classList.remove('open');
+      trigger.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Escape closes
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && dd.classList.contains('open')){
+      dd.classList.remove('open');
+      trigger.setAttribute('aria-expanded', 'false');
+      trigger.focus();
     }
   });
 })();
