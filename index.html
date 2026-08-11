@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pantelis Theocharides — Senior Product Manager | Risk, Fraud & Player Behaviour</title>
+<title>Pantelis Theocharides — Senior iGaming Product Manager</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -504,8 +504,8 @@
           <a href="#case-risk" role="menuitem">Risk &amp; Fraud <span class="nav-dd-co">B2Tech</span></a>
           <a href="#case-crm" role="menuitem">Sweepstakes &amp; Back Office <span class="nav-dd-co">NuxGame</span></a>
           <a href="#case-promotions" role="menuitem">Promotions</a>
-          <a href="#case-leap" role="menuitem">Virtual Sports <span class="nav-dd-co">Leap Gaming</span></a>
           <a href="#pvp" role="menuitem">PVP Slot Arena <span class="nav-dd-co">Personal build</span></a>
+          <a href="#case-leap" role="menuitem">Virtual Sports <span class="nav-dd-co">Leap Gaming</span></a>
         </div>
       </div>
       <a href="#approach">Approach</a>
@@ -523,8 +523,8 @@
     <a href="#case-risk" class="mobile-nav-sub">↳ Risk &amp; Fraud (B2Tech)</a>
     <a href="#case-crm" class="mobile-nav-sub">↳ Sweepstakes &amp; Back Office (NuxGame)</a>
     <a href="#case-promotions" class="mobile-nav-sub">↳ Promotions</a>
-    <a href="#case-leap" class="mobile-nav-sub">↳ Virtual Sports (Leap Gaming)</a>
     <a href="#pvp" class="mobile-nav-sub">↳ PVP Slot Arena</a>
+    <a href="#case-leap" class="mobile-nav-sub">↳ Virtual Sports (Leap Gaming)</a>
     <a href="#approach">Approach</a>
     <a href="#experience">Experience</a>
     <a href="#contact">Contact</a>
@@ -538,12 +538,12 @@
   <div class="wrap">
     <div class="hero-top">
       <img src="wireframes/headshot.jpg" alt="Pantelis Theocharides" class="avatar">
-      <div class="badge"><span class="dot"></span> Senior Product Manager — Risk, Fraud &amp; Player Behaviour  ·  Nicosia, Cyprus</div>
+      <div class="badge"><span class="dot"></span> Senior iGaming Product Manager  ·  Nicosia, Cyprus</div>
     </div>
-    <h1>From the <em>trading desk</em> to the <em>product roadmap</em>.</h1>
+    <h1><em>Risk</em> is the specialty; <em>product across the platform</em> is the profession.</h1>
     <p class="hero-sub">
-      Two decades reading players, operators, and the platforms between them. I ship product across the
-      iGaming ecosystem — with behavioural risk as the specialty I keep coming back to.
+      20 years across iGaming — from sportsbook and analytics to player experience, commercial systems,
+      platform tooling, and behavioural risk.
     </p>
     <div class="hero-cta">
       <a href="#work" class="btn btn-primary">See the work →</a>
@@ -670,10 +670,87 @@
           <span class="ct-line"></span>
         </div>
         <p style="color:var(--muted);font-size:14.5px;line-height:1.7;margin-top:12px;">Static, binary rules — block this IP, cap this deposit — degrade fast against adaptive fraud, and don't reflect the operational reality of B2B omnichannel operators: mobile money payments, retail agent networks, fragmented identity infrastructure, USSD sessions with no persistent device fingerprint. Manual review doesn't scale as new operators onboard.</p>
-        <p style="color:var(--muted);font-size:14.5px;line-height:1.7;margin-top:12px;">My priorities: moving detection from static thresholds toward a hybrid model — rules for known patterns, scoring for everything else — so a genuinely new fraud pattern doesn't need a hard-coded rule written before it can be caught. Structuring detection logic around Trigger → Condition → Action so Risk Ops can read and reason about any rule the same way, regardless of which system raised it. Building progressive, risk-based KYC so verification escalates only when triggered by deposit thresholds, withdrawal requests, or behavioural flags.</p>
+        <p style="color:var(--muted);font-size:14.5px;line-height:1.7;margin-top:12px;">My priorities: moving detection from static thresholds toward a hybrid model where rules capture known abuse patterns, and scoring combines weaker behavioural signals to surface emerging risk no single rule would justify acting on. Structuring detection logic around Trigger → Condition → Action so Risk Ops can read and reason about any rule the same way, regardless of which system raised it. Building progressive, risk-based KYC so verification escalates only when triggered by deposit thresholds, withdrawal requests, or behavioural flags.</p>
 
         <div class="chapter-tag">
           <span class="ct-num">02</span>
+          <span class="ct-title">End-to-end risk lifecycle</span>
+          <span class="ct-line"></span>
+        </div>
+        <div class="crm-diagram" aria-label="End-to-end risk lifecycle: an event fires signals, which run through rules and scoring to produce a decision; the decision drives an action, which opens a case for an analyst; the analyst outcome feeds back to tune rules and scoring.">
+          <svg viewBox="0 0 720 260" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="lcarr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+                <path d="M0 0 L10 5 L0 10 z" fill="#0f766e"/>
+              </marker>
+              <marker id="lcarramber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+                <path d="M0 0 L10 5 L0 10 z" fill="#b45309"/>
+              </marker>
+            </defs>
+            <g font-family="Inter, system-ui, sans-serif">
+              <!-- Row 1 -->
+              <rect x="10" y="20" width="150" height="50" rx="8" fill="#fffdf9" stroke="#e8e1d3"/>
+              <text x="85" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#292520">Event</text>
+              <text x="85" y="58" text-anchor="middle" font-size="10.5" fill="#6b6459">login · deposit · bet</text>
+
+              <line x1="165" y1="45" x2="195" y2="45" stroke="#0f766e" stroke-width="1.6" marker-end="url(#lcarr)"/>
+
+              <rect x="200" y="20" width="150" height="50" rx="8" fill="#fffdf9" stroke="#e8e1d3"/>
+              <text x="275" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#292520">Signals</text>
+              <text x="275" y="58" text-anchor="middle" font-size="10.5" fill="#6b6459">device · IP · payment · velocity</text>
+
+              <line x1="355" y1="45" x2="385" y2="45" stroke="#0f766e" stroke-width="1.6" marker-end="url(#lcarr)"/>
+
+              <rect x="390" y="20" width="170" height="50" rx="8" fill="#f2ede3" stroke="#0f766e" stroke-width="1.5"/>
+              <text x="475" y="40" text-anchor="middle" font-size="12" font-weight="700" fill="#0f766e">Rules + Scoring</text>
+              <text x="475" y="56" text-anchor="middle" font-size="10.5" fill="#6b6459">known patterns · weak signals</text>
+
+              <line x1="565" y1="45" x2="595" y2="45" stroke="#0f766e" stroke-width="1.6" marker-end="url(#lcarr)"/>
+
+              <rect x="600" y="20" width="110" height="50" rx="8" fill="#fffdf9" stroke="#e8e1d3"/>
+              <text x="655" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#292520">Decision</text>
+              <text x="655" y="58" text-anchor="middle" font-size="10.5" fill="#6b6459">allow · flag · block</text>
+
+              <!-- Snake down-right -->
+              <line x1="655" y1="75" x2="655" y2="105" stroke="#0f766e" stroke-width="1.6" marker-end="url(#lcarr)"/>
+
+              <!-- Row 2 (right to left) -->
+              <rect x="600" y="110" width="110" height="50" rx="8" fill="#fffdf9" stroke="#e8e1d3"/>
+              <text x="655" y="132" text-anchor="middle" font-size="12" font-weight="700" fill="#292520">Action</text>
+              <text x="655" y="148" text-anchor="middle" font-size="10.5" fill="#6b6459">alert · hold · suspend</text>
+
+              <line x1="595" y1="135" x2="565" y2="135" stroke="#0f766e" stroke-width="1.6" marker-end="url(#lcarr)"/>
+
+              <rect x="425" y="110" width="140" height="50" rx="8" fill="#fffdf9" stroke="#e8e1d3"/>
+              <text x="495" y="132" text-anchor="middle" font-size="12" font-weight="700" fill="#292520">Case</text>
+              <text x="495" y="148" text-anchor="middle" font-size="10.5" fill="#6b6459">investigation opened</text>
+
+              <line x1="420" y1="135" x2="390" y2="135" stroke="#0f766e" stroke-width="1.6" marker-end="url(#lcarr)"/>
+
+              <rect x="235" y="110" width="150" height="50" rx="8" fill="#fffdf9" stroke="#e8e1d3"/>
+              <text x="310" y="132" text-anchor="middle" font-size="12" font-weight="700" fill="#292520">Analyst outcome</text>
+              <text x="310" y="148" text-anchor="middle" font-size="10.5" fill="#6b6459">confirm · overturn · escalate</text>
+
+              <line x1="230" y1="135" x2="200" y2="135" stroke="#b45309" stroke-width="1.6" stroke-dasharray="4,3" marker-end="url(#lcarramber)"/>
+
+              <rect x="10" y="110" width="185" height="50" rx="8" fill="#fffdf9" stroke="#b45309" stroke-width="1.5"/>
+              <text x="102" y="132" text-anchor="middle" font-size="12" font-weight="700" fill="#b45309">Feedback</text>
+              <text x="102" y="148" text-anchor="middle" font-size="10.5" fill="#6b6459">tunes rules and scoring</text>
+
+              <!-- Feedback loop back up to Rules + Scoring -->
+              <path d="M 102 110 Q 102 90 200 90 Q 475 90 475 75" fill="none" stroke="#b45309" stroke-width="1.6" stroke-dasharray="4,3" marker-end="url(#lcarramber)"/>
+              <text x="288" y="83" text-anchor="middle" font-size="10" font-style="italic" fill="#b45309">Analyst calls become training data</text>
+
+              <!-- Legend bottom -->
+              <text x="360" y="200" text-anchor="middle" font-size="11" fill="#6b6459">Detection is a loop, not a pipeline. Every analyst call closes the loop back to the model.</text>
+              <text x="360" y="220" text-anchor="middle" font-size="10.5" font-style="italic" fill="#8a8377">Explainability at every stage — Risk Ops and Compliance can trace any decision from event to outcome.</text>
+            </g>
+          </svg>
+          <div class="shot-caption" style="text-align:center;margin-top:4px;"><strong>End-to-end risk lifecycle.</strong> Event fires signals → hybrid rules + scoring produces a decision → action opens a case → analyst outcome feeds back to tune rules and scoring. Explainable at every stage.</div>
+        </div>
+
+        <div class="chapter-tag">
+          <span class="ct-num">03</span>
           <span class="ct-title">Operating model in action · prototype</span>
           <span class="ct-line"></span>
         </div>
@@ -712,6 +789,121 @@
             <li class="story-cap">Trigger → Condition → Action model</li>
             <li class="story-cap">Regression-testable before deploy</li>
           </ul>
+        </div>
+
+        <div class="chapter-tag">
+          <span class="ct-num">04</span>
+          <span class="ct-title">Investigation, controls, and auditability</span>
+          <span class="ct-line"></span>
+        </div>
+        <div class="crm-diagram" aria-label="Investigation view for a flagged player: contributing signals with weights, triggered rules, linked accounts, recommended action, analyst decision with override reason code, event timeline, and audit history — everything Risk Ops and Compliance need to defend a decision after the fact.">
+          <svg viewBox="0 0 720 400" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="invarr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+                <path d="M0 0 L10 5 L0 10 z" fill="#0f766e"/>
+              </marker>
+            </defs>
+            <g font-family="Inter, system-ui, sans-serif">
+              <!-- Panel background -->
+              <rect x="6" y="6" width="708" height="388" rx="10" fill="#fffdf9" stroke="#e8e1d3"/>
+              <rect x="6" y="6" width="708" height="28" rx="10" fill="#f2ede3" stroke="#e8e1d3"/>
+              <text x="20" y="24" font-size="11" font-weight="700" fill="#292520">Case P-89432 · opened 10:24</text>
+              <text x="700" y="24" text-anchor="end" font-size="10.5" fill="#6b6459">Assigned: @jordan · SLA 4h</text>
+
+              <!-- Left column: Player + Score -->
+              <text x="20" y="54" font-size="10" font-weight="700" fill="#8a8377" letter-spacing="1">PLAYER</text>
+              <text x="20" y="72" font-size="13" font-weight="700" fill="#292520">P-89432</text>
+              <text x="20" y="88" font-size="10.5" fill="#6b6459">Reg 03 Aug · Tier: Bronze</text>
+
+              <rect x="20" y="98" width="180" height="70" rx="8" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.5"/>
+              <text x="35" y="118" font-size="10" font-weight="700" fill="#b91c1c" letter-spacing="1">RISK SCORE</text>
+              <text x="35" y="148" font-size="28" font-weight="800" fill="#b91c1c">87</text>
+              <rect x="130" y="128" width="55" height="22" rx="4" fill="#b91c1c"/>
+              <text x="157" y="143" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fffdf9">HIGH</text>
+
+              <text x="20" y="188" font-size="10" font-weight="700" fill="#8a8377" letter-spacing="1">RECOMMENDED</text>
+              <rect x="20" y="196" width="180" height="30" rx="6" fill="#fef2f2" stroke="#b91c1c"/>
+              <text x="110" y="215" text-anchor="middle" font-size="11" font-weight="700" fill="#b91c1c">Suspend withdrawal</text>
+
+              <!-- Center column: Signals -->
+              <text x="220" y="54" font-size="10" font-weight="700" fill="#8a8377" letter-spacing="1">CONTRIBUTING SIGNALS</text>
+              <text x="220" y="72" font-size="10.5" fill="#292520">Multiple accounts (same device)</text>
+              <text x="440" y="72" text-anchor="end" font-size="10.5" font-weight="700" fill="#b45309">+28</text>
+              <text x="220" y="90" font-size="10.5" fill="#292520">Card BIN vs registration country</text>
+              <text x="440" y="90" text-anchor="end" font-size="10.5" font-weight="700" fill="#b45309">+14</text>
+              <text x="220" y="108" font-size="10.5" fill="#292520">VPN detected</text>
+              <text x="440" y="108" text-anchor="end" font-size="10.5" font-weight="700" fill="#b45309">+11</text>
+              <text x="220" y="126" font-size="10.5" fill="#292520">Deposit velocity (3 in 8 min)</text>
+              <text x="440" y="126" text-anchor="end" font-size="10.5" font-weight="700" fill="#b45309">+10</text>
+              <text x="220" y="144" font-size="10.5" fill="#292520">First-deposit → withdraw pattern</text>
+              <text x="440" y="144" text-anchor="end" font-size="10.5" font-weight="700" fill="#b45309">+8</text>
+              <line x1="220" y1="154" x2="440" y2="154" stroke="#e8e1d3" stroke-width="1"/>
+              <text x="220" y="170" font-size="10.5" font-weight="700" fill="#292520">Total signal weight</text>
+              <text x="440" y="170" text-anchor="end" font-size="10.5" font-weight="700" fill="#292520">71 · scored 87</text>
+
+              <text x="220" y="196" font-size="10" font-weight="700" fill="#8a8377" letter-spacing="1">TRIGGERED RULES</text>
+              <rect x="220" y="203" width="220" height="22" rx="4" fill="#f2ede3" stroke="#e8e1d3"/>
+              <text x="230" y="218" font-size="10.5" fill="#292520">R-042 · VPN + high-deposit velocity</text>
+              <rect x="220" y="228" width="220" height="22" rx="4" fill="#f2ede3" stroke="#e8e1d3"/>
+              <text x="230" y="243" font-size="10.5" fill="#292520">R-113 · Multi-account cluster</text>
+
+              <!-- Right column: Linked + Analyst -->
+              <text x="460" y="54" font-size="10" font-weight="700" fill="#8a8377" letter-spacing="1">LINKED ACCOUNTS</text>
+              <text x="460" y="72" font-size="10.5" fill="#292520">P-89401 · same device fingerprint</text>
+              <text x="460" y="90" font-size="10.5" fill="#292520">P-89055 · same card BIN + IP /24</text>
+              <text x="460" y="108" font-size="10.5" font-style="italic" fill="#6b6459">Cluster: 3 accounts · risk 74 avg</text>
+
+              <text x="460" y="136" font-size="10" font-weight="700" fill="#8a8377" letter-spacing="1">ANALYST DECISION</text>
+              <rect x="460" y="144" width="115" height="26" rx="5" fill="#fffdf9" stroke="#0f766e" stroke-width="1.5"/>
+              <text x="517" y="161" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0f766e">Confirm block</text>
+              <rect x="580" y="144" width="125" height="26" rx="5" fill="#fffdf9" stroke="#e8e1d3"/>
+              <text x="642" y="161" text-anchor="middle" font-size="10.5" fill="#6b6459">Overturn (needs reason)</text>
+
+              <text x="460" y="188" font-size="10" font-weight="700" fill="#8a8377" letter-spacing="1">OVERRIDE REASON</text>
+              <rect x="460" y="196" width="245" height="26" rx="5" fill="#fffdf9" stroke="#e8e1d3"/>
+              <text x="470" y="213" font-size="10.5" fill="#8a8377">Select reason code (required)  ▾</text>
+              <text x="460" y="238" font-size="9.5" font-style="italic" fill="#8a8377">e.g. verified via KYC · known good IP · charge-back reversed</text>
+
+              <!-- Bottom: Timeline strip -->
+              <line x1="20" y1="272" x2="700" y2="272" stroke="#e8e1d3" stroke-width="1"/>
+              <text x="20" y="290" font-size="10" font-weight="700" fill="#8a8377" letter-spacing="1">EVENT TIMELINE</text>
+
+              <circle cx="30" cy="315" r="4" fill="#0f766e"/>
+              <text x="30" y="335" text-anchor="middle" font-size="9.5" fill="#292520">10:14</text>
+              <text x="30" y="348" text-anchor="middle" font-size="9" fill="#6b6459">Login</text>
+
+              <line x1="35" y1="315" x2="145" y2="315" stroke="#e8e1d3" stroke-width="1.5"/>
+              <circle cx="150" cy="315" r="4" fill="#0f766e"/>
+              <text x="150" y="335" text-anchor="middle" font-size="9.5" fill="#292520">10:16</text>
+              <text x="150" y="348" text-anchor="middle" font-size="9" fill="#6b6459">Deposit €500</text>
+
+              <line x1="155" y1="315" x2="270" y2="315" stroke="#e8e1d3" stroke-width="1.5"/>
+              <circle cx="275" cy="315" r="4" fill="#0f766e"/>
+              <text x="275" y="335" text-anchor="middle" font-size="9.5" fill="#292520">10:19</text>
+              <text x="275" y="348" text-anchor="middle" font-size="9" fill="#6b6459">Bet €480</text>
+
+              <line x1="280" y1="315" x2="395" y2="315" stroke="#e8e1d3" stroke-width="1.5"/>
+              <circle cx="400" cy="315" r="4" fill="#b45309"/>
+              <text x="400" y="335" text-anchor="middle" font-size="9.5" fill="#b45309" font-weight="700">10:22</text>
+              <text x="400" y="348" text-anchor="middle" font-size="9" fill="#b45309">Withdraw req €480</text>
+
+              <line x1="405" y1="315" x2="520" y2="315" stroke="#b45309" stroke-width="1.5" stroke-dasharray="3,3"/>
+              <circle cx="525" cy="315" r="4" fill="#b91c1c"/>
+              <text x="525" y="335" text-anchor="middle" font-size="9.5" fill="#b91c1c" font-weight="700">10:23</text>
+              <text x="525" y="348" text-anchor="middle" font-size="9" fill="#b91c1c">Rules fired · case opened</text>
+
+              <line x1="530" y1="315" x2="645" y2="315" stroke="#e8e1d3" stroke-width="1.5"/>
+              <circle cx="650" cy="315" r="4" fill="#8a8377"/>
+              <text x="650" y="335" text-anchor="middle" font-size="9.5" fill="#8a8377">now</text>
+              <text x="650" y="348" text-anchor="middle" font-size="9" fill="#8a8377">Analyst review</text>
+
+              <!-- Audit footer -->
+              <line x1="20" y1="365" x2="700" y2="365" stroke="#e8e1d3" stroke-width="1"/>
+              <text x="20" y="382" font-size="10" font-weight="700" fill="#8a8377" letter-spacing="1">AUDIT</text>
+              <text x="70" y="382" font-size="10" fill="#6b6459">Rule engine v2.3 · Hybrid scoring v1.4 · Model config hash 8f2c1a · Evidence: IP, device fp, KYC docs · Every field version-tracked and exportable to Compliance</text>
+            </g>
+          </svg>
+          <div class="shot-caption" style="text-align:center;margin-top:4px;"><strong>Investigation view — one screen, everything an analyst needs to defend a decision.</strong> Score with contributing signals and weights, triggered rules, linked-account cluster, timeline, override with reason code, and a full audit trail. Explainability is the product, not a compliance afterthought.</div>
         </div>
 
         <div class="case-cols">
@@ -1464,7 +1656,7 @@
 <section class="contact" id="contact">
   <div class="wrap">
     <div class="eyebrow">Contact</div>
-    <h2>If you're building iGaming products where risk, promotions, or player behaviour matter — let's talk.</h2>
+    <h2>If you're building ambitious iGaming products — player experience, commercial systems, platform tooling, or risk — let's talk.</h2>
     <p class="section-intro" style="margin-left:auto;margin-right:auto;">
       Also happy to chat about how the balance between player experience, commercial performance, operator
       efficiency, and risk actually plays out in production — or about anything specific from the cases above.
